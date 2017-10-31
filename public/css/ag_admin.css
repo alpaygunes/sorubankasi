@@ -1,0 +1,134 @@
+.ag-panel{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    border-radius: 0px!important;
+    box-shadow: 2px 2px 5px #ccc;
+}
+
+.ag-panel .ag-label{
+    margin-top: 10px;
+}
+.ag-panel .label-danger{
+    margin-top: 0px!important;
+    display: block;
+    text-align: left;
+    font-size: 10px;
+}
+
+
+.ag-soru-panel {
+    float: left;
+    min-height: 400px;
+    overflow: hidden;
+    padding: 0px!important;
+    margin: 0px!important;
+}
+
+
+.ag-soru-panel img{
+    position: relative!important;
+    max-width: 80%;
+    display: block;
+    margin: auto;
+}
+
+.ag-soru-no{
+    position: absolute;
+    left:10px;
+    top:10px;
+}
+.ag-sorumetni{
+    position: relative;
+    width: 90%;
+    margin-left: 26px;
+    margin-top: 11px;
+    overflow: hidden;
+}
+
+
+.ag-form-control{
+    border-radius: 0px!important;
+}
+
+.ag-baslik-kutusu{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 0px!important;
+    box-shadow: 2px 2px 5px #ccc;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 50px;
+}
+
+.ag-soru-sil-duzenle{
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    padding:5px;
+    font-size: 10px;
+    cursor: pointer;
+}
+.ag-soru-sil-duzenle:hover{
+    border: 1px solid #000;
+    background-color: #c0c0c0;
+}
+
+.ag-soru-arac-cubugu{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.ag-alert{
+    border-radius: 0px!important;
+    padding: 5px!important;
+    padding-left: 20px !important;
+}
+
+
+.ust-menu-ogesi{
+    position: relative;
+    float: right;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.ust-menu-ogesi a{
+    margin-right: 30px!important;
+}
+
+.ag-sayfalama-cubugu{
+    margin-top: 50px;
+    display: block;
+    float: left;
+    height: 50px!important;
+    width: 100%;
+    padding: 7px!important;
+    text-align: center;
+}
+.ag-sayfalama-cubugu .pagination{
+    margin: 0!important;
+}
+
+
+#ag-sidebar{
+    float: left;
+    width: 200px;
+}
+
+
+#ag-content{
+    position: relative;
+    overflow: hidden;
+    background: #e4eff1;
+    min-height: 800px!important;
+    padding-top: 250px;
+    padding: 50px;
+}
+
+#ag-sol-menu{
+    float: left;
+}
+
+

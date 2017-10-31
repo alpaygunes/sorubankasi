@@ -1,0 +1,142 @@
+.ag-panel{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    border-radius: 0px!important;
+    box-shadow: none!important;
+    border: none!important;
+}
+
+.ag-panel .ag-label{
+    margin-top: 10px;
+}
+.ag-panel .label-danger{
+    margin-top: 0px!important;
+    display: block;
+    text-align: left;
+    font-size: 10px;
+}
+
+.ag-form-control{
+    border-radius: 0px!important;
+}
+
+.ag-baslik-kutusu{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 0px!important;
+    box-shadow: 2px 2px 5px #ccc;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 50px;
+}
+
+.ag-soru-sil-duzenle{
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    padding:5px;
+    font-size: 10px;
+    cursor: pointer;
+}
+.ag-soru-sil-duzenle:hover{
+    border: 1px solid #000;
+    background-color: #c0c0c0;
+}
+
+.ag-soru-arac-cubugu{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.ag-alert{
+    border-radius: 0px!important;
+    padding: 5px!important;
+    padding-left: 20px !important;
+}
+
+
+.ag-ust-menu-ogesi{
+    position: relative;
+    float: right;
+    margin: 0px;
+    cursor: pointer;
+    padding-right: 50px;
+}
+
+.ag-ust-menu-ogesi a {
+    float: right;
+    margin-left: 20px;
+}
+
+.ag-sayfalama-cubugu{
+    position: absolute;
+    margin-top: 50px;
+    display: block;
+    float: left;
+    height: 50px!important;
+    width: 90%;
+    padding: 7px!important;
+    text-align: center;
+    bottom: 0px;
+}
+.ag-sayfalama-cubugu .pagination{
+    margin: 0!important;
+}
+
+
+#ag-sidebar{
+    float: left;
+    width: 200px;
+}
+
+
+#ag-content{
+    position: relative;
+    overflow: hidden;
+    background: #e4eff1;
+    min-height: 800px!important;
+    padding-top: 250px;
+    padding: 50px;
+}
+
+#ag-sol-menu{
+    float: left;
+}
+
+
+.ag-front-panel{
+    position: relative;
+    float: left;
+    min-height:600px;
+    margin-bottom: 22px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    box-shadow: 0!important;
+    border-radius: 0px!important;
+    padding:50px;
+}
+
+.ag-front-panel .btn{
+    padding: 5px!important;
+    border-radius: 0!important;
+    line-height: normal;!important;
+    width: 200px;
+}
+
+
+.borderless td, .borderless th {
+    border: none!important;
+}
+
+.ag-front-baslik-kutusu{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-radius: 0px!important;
+    height: 50px;
+    font-size: 20px;
+    padding-left: 50px;
+}
+
