@@ -1,10 +1,9 @@
 @extends('front.layouts.front')
 
 @section('content')
-    <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
+                <div class="panel panel-default ag-form-panel">
                     <div class="panel-heading">Üyelik Formu</div>
 
                     <div class="panel-body">
@@ -64,14 +63,32 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Register
+                                        Tamam
                                     </button>
                                 </div>
                             </div>
                         </form>
                     </div>
+
                 </div>
             </div>
         </div>
-    </div>
+
+    <style>
+        .navbar{
+            display: none;
+        }
+
+        .ag-form-panel {
+            position: relative;
+            box-shadow: 10px 10px 50px #000;
+        }
+
+        .ag-form-panel label {
+            color: #8c8c8c;
+        }
+
+
+    </style>
+
 @endsection

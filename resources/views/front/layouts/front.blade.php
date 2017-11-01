@@ -8,7 +8,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Sorubankası') }}</title>
+    <title>{{ config('app.name') }}</title>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Anton|Dosis:800|Hind:300|Indie+Flower" rel="stylesheet">
 
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -29,7 +32,12 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
+
+
+
+
+
+         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -43,7 +51,6 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Sorubankası') }}
                     </a>
                 </div>
 
@@ -89,14 +96,56 @@
         </nav>
 
 
+
+
+
         <div class="container">
-            <div class="row">
+
+            <div class="ust">
+                <div class="logo">
+                </div>
+            </div>
+
+
                 @if (Auth::check())
                     @include('front.inc_menu')
                 @endif
                 @yield('content')
-            </div>
         </div>
     </div>
 </body>
 </html>
+
+
+<style>
+
+
+    body{
+        background-color: #adc8e3;
+    }
+
+    .container{
+        width: 100%!important;
+        padding: 0px!important;
+    }
+
+    .logo{
+        position: relative;
+        height: 150px;
+        width: 400px;
+        background-image: url("/bgimages/logo.png");
+        background-repeat: no-repeat;
+        top: 30px;
+        left: 25px;
+    }
+
+    .ust{
+        height: 207px;
+        width: 100%;
+        background-image: url("/bgimages/ust.png");
+        background-repeat: repeat-x;
+    }
+
+
+
+</style>

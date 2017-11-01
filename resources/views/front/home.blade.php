@@ -9,12 +9,31 @@
             </div>
         @endif
         <div class="panel ag-front-panel col-md-12">
+            <div class="ag-dugmeler row">
+
+                <div class="ag-buyuk-btn" id="ag-buyuk-btn-soru-coz">
+                    <div class="ag-btn-txt"> Soru çöz</div>
+                </div>
+
+                <div class="ag-buyuk-btn" id="ag-buyuk-btn-varliklarim">
+                    <div class="ag-btn-txt"> Valıklarım</div>
+                </div>
+
+                <div class="ag-buyuk-btn" id="ag-buyuk-btn-duello">
+                    <div class="ag-btn-txt"> Duello </div>
+                </div>
+
+                <div class="ag-buyuk-btn" id="ag-buyuk-btn-arkadaslarim">
+                    <div class="ag-btn-txt"> Arkadaşlarım </div>
+                </div>
+
+            </div>
             <div>Hamle bekleyen duellolarım</div>
             <div id="ag-sira-bende" class="row"></div>
             <div>Hamle yaptığım duellolarım</div>
             <div id="ag-sira-rakipte" class="row"></div>
         </div>
-    </div>
+</div>
 
 
 
@@ -383,6 +402,79 @@
         .ag-kazandin{
             border-color: red;
         }
+
+
+        .ag-dugmeler{
+            margin-bottom: 100px;
+        }
+
+        .ag-buyuk-btn{
+            position: relative;
+            width: 150px;
+            height: 160px;
+            background-repeat: no-repeat;
+            display: block;
+            float: left;
+            margin: 20px;
+        }
+
+        #ag-buyuk-btn-soru-coz{
+            width: 150px;
+            height: 160px;
+            background-image: url("/bgimages/bt-soru-coz.png");
+            background-size: 100%;
+            position: relative;
+            display: block;
+        }
+
+        #ag-buyuk-btn-varliklarim{
+            width: 150px;
+            height: 160px;
+            background-image: url("/bgimages/bt-varliklarim.png");
+            background-size: 100%;
+            position: relative;
+            display: block;
+        }
+
+        #ag-buyuk-btn-duello{
+            width: 150px;
+            height: 160px;
+            background-image: url("/bgimages/bt-duello.png");
+            background-size: 100%;
+            position: relative;
+            display: block;
+        }
+
+
+
+        #ag-buyuk-btn-arkadaslarim{
+            width: 150px;
+            height: 160px;
+            background-image: url("/bgimages/bt-arkadaslarim.png");
+            background-size: 100%;
+            position: relative;
+            display: block;
+        }
+
+        .ag-btn-txt{
+            font-family: "Open Sans","Helvetica Neue","Helvetica","Roboto","Arial",sans-serif;
+            font-size: 22px;
+            color: #fff;
+            position: absolute;
+            bottom: 11px;
+            text-align: center;
+            width: 100%;
+            text-shadow: 1px 1px 1px #000;
+            /*font-family: 'Indie Flower', cursive;*/
+            font-family: 'Anton', sans-serif;
+            /*font-family: 'Anton', sans-serif;
+            font-family: 'Hind', sans-serif;*/
+            height: 30px;
+            line-height: 25px;
+            padding: 3px;
+        }
+
+
 
     </style>
 
