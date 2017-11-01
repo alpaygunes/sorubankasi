@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="col-sm-9 col-md-10 col-lg-10 col-xl-10" >
+<div class="col-sm-12 col-md-10 col-lg-10 col-xl-10" >
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                 {{$baslik}}
@@ -11,26 +11,26 @@
         <div class="panel ag-front-panel col-md-12">
             <div class="ag-dugmeler row">
 
-                <div class="ag-buyuk-btn" id="ag-buyuk-btn-soru-coz">
+                <div class="ag-buyuk-btn" onclick="window.location.href='/sorucoz/giris'" id="ag-buyuk-btn-soru-coz">
                     <div class="ag-btn-txt"> Soru çöz</div>
                 </div>
 
-                <div class="ag-buyuk-btn" id="ag-buyuk-btn-varliklarim">
+                <div class="ag-buyuk-btn" onclick="window.location.href='/varliklarim'"  id="ag-buyuk-btn-varliklarim">
                     <div class="ag-btn-txt"> Valıklarım</div>
                 </div>
 
-                <div class="ag-buyuk-btn" id="ag-buyuk-btn-duello">
+                <div class="ag-buyuk-btn" onclick="window.location.href='/duello'"  id="ag-buyuk-btn-duello">
                     <div class="ag-btn-txt"> Duello </div>
                 </div>
 
-                <div class="ag-buyuk-btn" id="ag-buyuk-btn-arkadaslarim">
+                <div class="ag-buyuk-btn" onclick="window.location.href='/arkadaslarim'"  id="ag-buyuk-btn-arkadaslarim">
                     <div class="ag-btn-txt"> Arkadaşlarım </div>
                 </div>
 
             </div>
-            <div>Hamle bekleyen duellolarım</div>
+            <h1>Hamle bekleyen duellolarım</h1>
             <div id="ag-sira-bende" class="row"></div>
-            <div>Hamle yaptığım duellolarım</div>
+            <h1>Hamle yaptığım duellolarım</h1>
             <div id="ag-sira-rakipte" class="row"></div>
         </div>
 </div>
@@ -159,6 +159,7 @@
                         $(btn_duello).attr('duello_id',val['id']);
                         $(btn_duello).addClass('ag-kutu-bana-gelenler');
                         $(btn_duello).html('<img class="ag-profil-resmi" src="'+ val['profil_resmi'] +'">');
+                        $(btn_duello).append('<div class="ag-profil-resmi-kizmizi-vs"></div>');
                         $("#ag-sira-bende").append($(btn_duello));
                     });
 
@@ -173,6 +174,7 @@
                         $(btn_duello).attr('kazanan',kazanan);
                         $(btn_duello).addClass('ag-kutu-gonderiklerim');
                         $(btn_duello).html('<img class="ag-profil-resmi" src="'+ val['profil_resmi'] +'">');
+                        $(btn_duello).append('<div class="ag-profil-resmi-sari-vs"></div>');
                         $("#ag-sira-rakipte").append($(btn_duello));
                     });
                 },
@@ -340,29 +342,57 @@
 
     <style>
         .ag-kutu-bana-gelenler{
-            width: 90px;
-            height: 100px;
+            position: relative;
+            width: 200px;
+            height: 300px;
             display: block;
             float: left;
-            border: 1px solid #ccc;
-            padding: 5px;
+            background-color: #b8d4f1;
+            margin: 20px;
+            border: 5px solid #609db8;
         }
 
 
         .ag-kutu-gonderiklerim{
-            width: 90px;
-            height: 100px;
+            position: relative;
+            width: 200px;
+            height: 300px;
             display: block;
             float: left;
-            border: 1px solid #ccc;
-            padding: 5px;
+            background-color: #b8d4f1;
+            margin: 20px;
+            border: 5px solid #609db8;
         }
 
         .ag-profil-resmi{
-            width: 75px;
+            width: 100%;
             border: 1px solid #ccc;
             float: left;
             padding: 10px;
+        }
+
+        .ag-profil-resmi-kizmizi-vs{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: block;
+            float: right;
+            right: 0;
+            background-image: url("/bgimages/duello-kirmizi.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
+        }
+
+        .ag-profil-resmi-sari-vs{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: block;
+            float: right;
+            right: 0;
+            background-image: url("/bgimages/duello-sari.png");
+            background-size: 100%;
+            background-repeat: no-repeat;
         }
 
         .ag-name{
@@ -416,6 +446,7 @@
             display: block;
             float: left;
             margin: 20px;
+            cursor: pointer;
         }
 
         #ag-buyuk-btn-soru-coz{

@@ -1,3 +1,12 @@
+h1{
+    font-size: 22px;
+    color: #fff;
+    width: 100%;
+    text-shadow: 1px 1px 1px #000;
+    font-family: 'Anton', sans-serif;
+}
+
+
 .ag-panel{
     margin-left: auto;
     margin-right: auto;

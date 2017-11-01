@@ -99,16 +99,16 @@
 
 
 
-        <div class="container">
+
 
             <div class="ust">
                 <div class="logo">
                 </div>
             </div>
 
-
+        <div class="container">
                 @if (Auth::check())
-                    @include('front.inc_menu')
+                    {{--@include('front.inc_menu')--}}
                 @endif
                 @yield('content')
         </div>
@@ -125,7 +125,6 @@
     }
 
     .container{
-        width: 100%!important;
         padding: 0px!important;
     }
 
