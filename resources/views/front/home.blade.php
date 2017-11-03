@@ -24,14 +24,14 @@
                 </div>
 
                 <div class="ag-buyuk-btn" onclick="window.location.href='/arkadaslarim'"  id="ag-buyuk-btn-arkadaslarim">
-                    <div class="ag-btn-txt"> Arkadaşlarım </div>
+                    <div class="ag-btn-txt"> Rakiplerim </div>
                 </div>
 
             </div>
-            <h1>Hamle bekleyen duellolarım</h1>
-            <div id="ag-sira-bende" class="row"></div>
-            <h1>Hamle yaptığım duellolarım</h1>
-            <div id="ag-sira-rakipte" class="row"></div>
+            <h1>Bunlara cevap ver</h1>
+            <div id="ag-sira-bende" class="row duellolar-kutusu"></div>
+            <h2>Sordukların</h2>
+            <div id="ag-sira-rakipte" class="row duellolar-kutusu"></div>
         </div>
 </div>
 
@@ -341,27 +341,36 @@
     </script>
 
     <style>
+
         .ag-kutu-bana-gelenler{
             position: relative;
-            width: 200px;
-            height: 300px;
+            width: 150px;
+            height: 170px;
             display: block;
             float: left;
             background-color: #b8d4f1;
             margin: 20px;
             border: 5px solid #609db8;
+            cursor: pointer;
+        }
+        .ag-kutu-bana-gelenler:hover{
+            border: 5px solid #335466;
         }
 
 
         .ag-kutu-gonderiklerim{
             position: relative;
-            width: 200px;
-            height: 300px;
+            width: 150px;
+            height: 170px;
             display: block;
             float: left;
             background-color: #b8d4f1;
             margin: 20px;
             border: 5px solid #609db8;
+            cursor: pointer;
+        }
+        .ag-kutu-gonderiklerim:hover{
+            border: 5px solid #0b404b;
         }
 
         .ag-profil-resmi{
@@ -369,6 +378,7 @@
             border: 1px solid #ccc;
             float: left;
             padding: 10px;
+            max-height: 100%;;
         }
 
         .ag-profil-resmi-kizmizi-vs{
@@ -435,7 +445,8 @@
 
 
         .ag-dugmeler{
-            margin-bottom: 100px;
+            margin-bottom: 0px;
+            border-bottom:10px solid #2f4f4f;
         }
 
         .ag-buyuk-btn{
@@ -489,17 +500,14 @@
 
         .ag-btn-txt{
             font-family: "Open Sans","Helvetica Neue","Helvetica","Roboto","Arial",sans-serif;
-            font-size: 22px;
+            font-size: 18px;
             color: #fff;
             position: absolute;
             bottom: 11px;
             text-align: center;
             width: 100%;
             text-shadow: 1px 1px 1px #000;
-            /*font-family: 'Indie Flower', cursive;*/
-            font-family: 'Anton', sans-serif;
-            /*font-family: 'Anton', sans-serif;
-            font-family: 'Hind', sans-serif;*/
+            font-family: 'Gloria Hallelujah', cursive;
             height: 30px;
             line-height: 25px;
             padding: 3px;

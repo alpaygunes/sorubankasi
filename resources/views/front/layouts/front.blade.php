@@ -11,7 +11,7 @@
     <title>{{ config('app.name') }}</title>
 
 
-    <link href="https://fonts.googleapis.com/css?family=Anton|Dosis:800|Hind:300|Indie+Flower" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Dosis:800|Hind:300|Indie+Flower|Gloria+Hallelujah" rel="stylesheet">
 
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -35,10 +35,9 @@
 
 
 
-
+{{--///////////////////////////////////// NAV BAR //////////////////////////////////////////////////--}}
 
          <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -63,6 +62,8 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
+
+                        <li><a href="/">Anasayfa</a></li>
                         @guest
                             <li><a href="/uyelik/giris">Giriş</a></li>
                             <li><a href="/uyelik/kayit">Kaydet</a></li>
@@ -92,17 +93,14 @@
                         @endguest
                     </ul>
                 </div>
-            </div>
         </nav>
 
 
 
 
-
-
-
             <div class="ust">
-                <div class="logo">
+                <div class="ag-logo">
+                    SoruSor.co
                 </div>
             </div>
 
@@ -112,37 +110,72 @@
                 @endif
                 @yield('content')
         </div>
+
+
+<!-- //////////////////////////////////////     GÖNDERİLEN DUELLO DETAYI MODAL   ////////////////////////////// -->
+        <div id="agMesajBoxModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Duello</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+<!--         ------------------ MODAL SONU ------------ -->
+
+
+
+
     </div>
+
 </body>
 </html>
 
+<script>
+    $(".ag-logo").click(function () {
+        window.location.href="/";
+    })
+</script>
 
 <style>
 
-
-    body{
-        background-color: #adc8e3;
-    }
 
     .container{
         padding: 0px!important;
     }
 
-    .logo{
+    .ag-logo{
         position: relative;
         height: 150px;
         width: 400px;
-        background-image: url("/bgimages/logo.png");
+        /*background-image: url("/bgimages/logo.png");*/
         background-repeat: no-repeat;
         top: 30px;
         left: 25px;
+        cursor: pointer;
+        font-size: 50px;
+        color: #fff;
+        font-family: 'Gloria Hallelujah', cursive;
     }
 
     .ust{
-        height: 207px;
+        height: 190px;
         width: 100%;
         background-image: url("/bgimages/ust.png");
         background-repeat: repeat-x;
+
     }
 
 

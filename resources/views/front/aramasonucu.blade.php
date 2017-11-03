@@ -10,13 +10,13 @@
             @foreach ( $sonucArr as $key => $value )
                 <?php $sayac++;?>
                 <tr>
-                    <td>
+                    <td style="text-align: center">
                         {{ $sonucArr->perPage()*($sonucArr->currentPage()-1)+$sayac . "." }}
                     </td>
                     <td>
                          {!! $value->name !!}
                     </td>
-                    <td>
+                    <td style="width: 150px">
                         @if($value->istek_gonderildi==1)
                             <div class="btn btn-default btn-xs ag-arkadaslik-istegi-gonder" islem="iptalet" user_id = "{!! $value->id !!}">İsteği iptal et</div>
                         @else
@@ -25,6 +25,9 @@
                     </td>
                 </tr>
             @endforeach
+            @if(count($sonucArr)==0)
+                {!!  '<div style="text-align:center;width:100%">Kritere uygun rakip bulunamadı</div>'!!}
+            @endif
         </table>
     </div>
 

@@ -4,21 +4,34 @@
 <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10" >
     @if(isset($baslik))
         <div class="panel ag-front-baslik-kutusu">
-            {{$baslik}}
+            <h1>{{$baslik}}</h1>
         </div>
     @endif
-
+        <div id="ag-rakibiniz">Rakibiniz  {{$rakip_bilgileri->name}}</div>
     <div class="panel ag-front-panel col-md-12">
-        <div>Rakibiniz : {{$rakip_bilgileri->name}}</div>
-        <div id="ag-soru-seviyesi-dugmleri" class="row">
-            <div>Sorularınızın zorluk seviyelerine göre sayıları</div>
-            <div class="ag-seviye-dugme" seviye="cok_kolay" id="ag-cok-kolay-btn"></div>
-            <div class="ag-seviye-dugme" seviye="kolay" id="ag-kolay-btn"></div>
-            <div class="ag-seviye-dugme" seviye="normal" id="ag-normal-btn"></div>
-            <div class="ag-seviye-dugme" seviye="zor" id="ag-zor-btn"></div>
-            <div class="ag-seviye-dugme" seviye="cok_zor" id="ag-cok-zor-btn"></div>
+
+        <div  class="ag-aciklama">
+            Rakibinize göndereceğiniz soru hangi seviyeden olsun ?
         </div>
-        <div id="ag-mesaj"></div>
+        <div id="ag-soru-seviyesi-dugmleri" class="row">
+            <h2>Sorularınızın seviyelerine göre sayıları</h2>
+            <div class="ag-seviye-dugme" seviye="cok_kolay" id="ag-cok-kolay-btn">
+                <div class="seviye-txt">Çok kolay</div>
+            </div>
+            <div class="ag-seviye-dugme" seviye="kolay" id="ag-kolay-btn">
+                <div class="seviye-txt">Kolay</div>
+            </div>
+            <div class="ag-seviye-dugme" seviye="normal" id="ag-normal-btn">
+                <div class="seviye-txt">Normal</div>
+            </div>
+            <div class="ag-seviye-dugme" seviye="zor" id="ag-zor-btn">
+                <div class="seviye-txt">Zor</div>
+            </div>
+            <div class="ag-seviye-dugme" seviye="cok_zor" id="ag-cok-zor-btn">
+                <div class="seviye-txt">Çok zor</div>
+            </div>
+        </div>
+        <div id="ag-mesaj" class="ag-aciklama"></div>
         <div id="ag-gonder" class="btn btn-primary" style="display: none">Soruyu Rakibine Gönder</div>
     </div>
 </div>
@@ -55,15 +68,15 @@
                         zorlukArr['cok_zor']++;
                     }
                 })
-                $('#ag-cok-kolay-btn').html(zorlukArr['cok_kolay']);
+                $('#ag-cok-kolay-btn').prepend(zorlukArr['cok_kolay']);
                 $('#ag-cok-kolay-btn').attr('soru_sayisi',zorlukArr['cok_kolay']);
-                $('#ag-kolay-btn').html(zorlukArr['kolay']);
+                $('#ag-kolay-btn').prepend(zorlukArr['kolay']);
                 $('#ag-kolay-btn').attr('soru_sayisi',zorlukArr['kolay']);
-                $('#ag-normal-btn').html(zorlukArr['normal']);
+                $('#ag-normal-btn').prepend(zorlukArr['normal']);
                 $('#ag-normal-btn').attr('soru_sayisi',zorlukArr['normal']);
-                $('#ag-zor-btn').html(zorlukArr['zor']);
+                $('#ag-zor-btn').prepend(zorlukArr['zor']);
                 $('#ag-zor-btn').attr('soru_sayisi',zorlukArr['zor']);
-                $('#ag-cok-zor-btn').html(zorlukArr['cok_zor']);
+                $('#ag-cok-zor-btn').prepend(zorlukArr['cok_zor']);
                 $('#ag-cok-zor-btn').attr('soru_sayisi',zorlukArr['cok_zor']);
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -119,7 +132,11 @@
             success: function(veri) {
                 console.log(veri);
                 if(veri['hata']=='sira_rakipte'){
-                    alert("Soru sorma sırası rakibinizde");
+                    //alert("Soru sorma sırası rakibinizde");
+                    $('#agMesajBoxModal').modal('show')
+                    $('#agMesajBoxModal .modal-body').html('Daha önce gönderilmiş bir sorunuz var.<br> Rakibinizin cevaplaması bekleniyor.')
+                    $('#agMesajBoxModal .modal-title').html('UYARI !')
+
                 }else{
                     alert("soru gönderildi")
                 }
@@ -134,15 +151,82 @@
 
     
 <style>
+
+    #ag-soru-seviyesi-dugmleri{
+        padding: 20px;
+    }
     .ag-seviye-dugme{
         width: 100px;
-        height: 125px;
+        height: 100px;
         margin: 25px;
-        padding: 10px;
         float: left;
-        border: 1px solid #ccc;
+        border: 3px solid #3b81cc;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: #b8d4f1;
+        border: 5px solid #609db8;
+        text-align: center;
+        font-size: 50px;
+        font-family: Anton;
+        vertical-align: middle;
+        text-shadow: 1px 1px 1px #000;
+        padding-top: 15px;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    .seviye-txt{
+        font-family: 'Gloria Hallelujah', cursive;
+        font-size: 15px;
+        position: relative;
+        width: 100%;
+        text-align: center;
     }
     
+    
+    #ag-kolay-btn{
+        background-image: url("/bgimages/kolay.png");
+    }
+
+    #ag-cok-kolay-btn{
+        background-image: url("/bgimages/cokkolay.png");
+    }
+
+    #ag-normal-btn{
+        background-image: url("/bgimages/normal.png");
+    }
+
+    #ag-zor-btn{
+        background-image: url("/bgimages/zor.png");
+    }
+
+    #ag-cok-zor-btn{
+        background-image: url("/bgimages/cok-zor.png");
+    }
+
+
+    #ag-mesaj{
+        margin-top: 50px;
+    }
+
+    #ag-gonder{
+        margin-top: 50px;
+        font-size: 18px;
+        font-family: Anton;
+    }
+
+    #ag-rakibiniz{
+        font-size: 25px;
+        width: 100%;
+        margin: 20px;
+        color: #fff;
+    }
+
+
+
+
+
 </style>
+
 
 @endsection

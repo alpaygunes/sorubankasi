@@ -6,23 +6,30 @@
 
     @if(isset($baslik))
         <div class="panel ag-front-baslik-kutusu">
-            {{$baslik}}
-            <div class="ag-ust-menu-ogesi">
-                <a href="#" id="ag-search">
-                    <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
-                </a>
-                <a href="#" id="ag-istekleri-listele">
-                    <span class="glyphicon glyphicon glyphicon-list" aria-hidden="true"></span>
-                </a>
+            <h1>{{$baslik}}</h1>
+        </div>
+        <div class="ag-ust-menu-ogesi">
 
-                <a href="#" id="ag-engellediklerim">
-                    Engellenenler
-                </a>
+            <a href="#" id="ag-search">
+                <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+            </a>
 
-                <a href="#" id="ag-silinenler">
-                    silinenler
-                </a>
-            </div>
+            <a href="#" id="ag-istekleri-listele">
+                Rakiplik istekleri.
+            </a>
+
+            <a href="#" id="ag-engellediklerim">
+                Engellediklerim
+            </a>
+
+            <a href="#" id="ag-silinenler">
+                Sildiklerim
+            </a>
+
+            <a href="#" onclick="window.location.href='/arkadaslarim'">
+                Rakiplerim
+            </a>
+
         </div>
     @endif
     @if(Session::has('mesaj'))
@@ -47,17 +54,22 @@
                         <td><img class="ag-kullanici-resmi" src='{{$value->profil_resmi==null?'/images/noimage.png':$value->profil_resmi}}'></td>
                         <td>{!! $value->name !!}</td>
                         <td>
-                           <div class="ag-listeden-sil" user_id="{!! $value->id !!}">Listeden sil</div>
+                           <div style="cursor:pointer" class="ag-listeden-sil" user_id="{!! $value->id !!}">Sil</div>
                         </td>
                         <td>
                             @if(isset($value->engelle))
-                                <div class="ag-engeli-kaldir" user_id="{!! $value->id !!}">Engeli Kaldır</div>
+                                <div style="cursor:pointer" class="ag-engeli-kaldir" user_id="{!! $value->id !!}">Engeli Kaldır</div>
                             @else
-                                <div class="ag-engelle" user_id="{!! $value->id !!}">Engelle</div>
+                                <div style="cursor:pointer" class="ag-engelle" user_id="{!! $value->id !!}">Engelle</div>
                             @endif
                         </td>
                     </tr>
                     @endforeach
+
+                    @if(count($arkadaslarArr)==0)
+                        {{"Henüz hiç rakibiniz yok"}}
+                    @endif
+
                 </table>
 
 
@@ -75,7 +87,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Arkadaş Ara</h4>
+                        <h4 class="modal-title">Rakip Ara</h4>
                     </div>
                     <div class="modal-body">
 
@@ -126,11 +138,31 @@
     }
 
     .ag-kullanici-resmi{
-        max-width:50px;
-        max-height: 50px;
-        padding: 5px;
-        border: 1px solid #ccc;
+        width: 75px;
+        max-height: 100px;
+        max-width: 75px;
+        padding: 3px;
+        border: 1px solid #537c7c;
+        background-color: #2d4c53;
     }
+
+    #ag-liste .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+        vertical-align:middle!important;
+    }
+    #ag-liste .table>tbody>tr>td{
+        font-size: 16px;
+        border-bottom: 2px solid #345555 !important;
+    }
+    
+    
+    .ag-silmeyi-gerial{
+        cursor: pointer;
+    }
+
+    .ag-ust-menu-ogesi{
+       font-size: 12px!important;
+    }
+
 
 </style>
 
@@ -200,14 +232,18 @@
                 tablogovdesi+='<tr>';
                 tablogovdesi+='<td user_id=\''+value['id']+'\'><img class="ag-kullanici-resmi" src='+value['profil_resmi']+'></td>';
                 tablogovdesi+='<td user_id=\''+value['id']+'\'>'+value['name']+'</td>';
-                tablogovdesi+='<td><div class="btn btn-default btn-sm" islem=\'onayla\' arkadas_id=\''+value['id']+'\' >Onayla</div></td>';
-                tablogovdesi+='<td><div class="btn btn-default btn-sm" islem=\'kaldir\' arkadas_id=\''+value['id']+'\'>Kaldır</div></td>';
+                tablogovdesi+='<td><div style="cursor:pointer"  islem=\'onayla\' arkadas_id=\''+value['id']+'\' >Onayla</div></td>';
+                tablogovdesi+='<td><div style="cursor:pointer"  islem=\'kaldir\' arkadas_id=\''+value['id']+'\'>Kaldır</div></td>';
                 tablogovdesi+='</tr>';
             });
             $('#ag-liste').hide();
             $('#ag-ajax-liste').show();
             $('#ag-ajax-liste').empty()
             $('#ag-ajax-liste').append('<table class="table borderless" >'+tablogovdesi+'</table>');
+
+            if(arkadaslikIstekleri.length==0){
+                $('#ag-ajax-liste').append('<div style="text-align: center;width: 100%">İstek listeniz boş.<div>');
+            }
         })
 
         $('#ag-ajax-liste').on('click','.btn',function () {
@@ -356,7 +392,9 @@
                     $('#ag-ajax-liste').empty()
                     $('#ag-ajax-liste').append('<table class="table borderless" >'+tablogovdesi+'</table>');
 
-
+                    if(engelliler.length==0){
+                        $('#ag-ajax-liste').append('<div style="text-align: center;width: 100%">Engellenler listeniz boş.<div>');
+                    }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -383,15 +421,20 @@
                             value['profil_resmi']='/images/noimage.png'
                         }
                         tablogovdesi+='<tr>';
-                        tablogovdesi+='<td user_id=\''+value['id']+'\'><img class="ag-kullanici-resmi" src='+value['profil_resmi']+'></td>';
+                        tablogovdesi+='<td style="width: 100px" user_id=\''+value['id']+'\'><img class="ag-kullanici-resmi" src='+value['profil_resmi']+'></td>';
                         tablogovdesi+='<td user_id=\''+value['id']+'\'>'+value['name']+'</td>';
-                        tablogovdesi+='<td><div class="btn btn-default btn-sm ag-silmeyi-gerial"  user_id=\''+value['id']+'\'>Tekrar Listeye Ekle</div></td>';
+                        tablogovdesi+='<td style="width: 100px"><div class="ag-silmeyi-gerial"  user_id=\''+value['id']+'\'>Geri al</div></td>';
                         tablogovdesi+='</tr>';
                     });
                     $('#ag-liste').hide();
                     $('#ag-ajax-liste').show();
                     $('#ag-ajax-liste').empty()
                     $('#ag-ajax-liste').append('<table class="table borderless" >'+tablogovdesi+'</table>');
+
+
+                    if(silinenler.length==0){
+                        $('#ag-ajax-liste').append('<div style="text-align: center;width: 100%">Silinenler listeniz boş.<div>');
+                    }
 
 
                 },

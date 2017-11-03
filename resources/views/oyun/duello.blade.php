@@ -4,7 +4,7 @@
     <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10" >
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
-                {{$baslik}}
+               <h1> {{$baslik}}</h1>
             </div>
         @endif
 
@@ -20,14 +20,17 @@
         @endif
 
         <div class="panel ag-front-panel col-md-12">
-            Duello Nedir ? <br>
-            Rakiplerin sırayla soru soruduğu ikili mücadele türünde yarışmadır.<br>
-            Zor sorular sorun ve arkadaşınızın altınlarını kapın. Size sorulan soruları cevabını bilin arkadaşınızın altınlarına el koyun.
+            <div class="ag-aciklama">
+            <h2>Duello Nedir ? </h2>
+            Duello akiplerin sırayla soru soruduğu ikili mücadele türünde bir yarışma.<br>
+            Zor sorular sorun ve rakiplerinizin altınlarını kapın.
+                <br>Size sorulan soruları cevaplayın, rakiplerinizin altınlarına el koyun.
 
-            <h4> Devam edenler</h4>
-            <div id="ag-devam-eden-liste"></div>
-            <h4> Yeni duello için rakip seç</h4>
-            <div id="ag-rakip-sec-liste"></div>
+            </div>
+            <h2> Devam edenler</h2>
+            <div id="ag-devam-eden-liste" class="row  duellolar-kutusu"></div>
+            <h2> Yeni duello için rakip seç</h2>
+            <div id="ag-rakip-sec-liste" class="row  duellolar-kutusu"></div>
         </div>
     </div>
 
@@ -162,18 +165,27 @@
     <style>
         .ag-arkadas-kutu {
             position: relative;
-            float: left;
-            width: 100px;
-            height: 125px;
-            border: 1px solid #ccc;
-            padding: 3px;
-            margin: 5px;
+            width: 150px;
+            height: 170px;
             display: block;
-            text-align: center;
+            float: left;
+            background-color: #b8d4f1;
+            margin: 20px;
+            border: 5px solid #609db8;
             cursor: pointer;
+            text-align: center;
         }
+
         .ag-arkadas-kutu img{
-            width: 90%;
+            width: 100%;
+            border: 1px solid #ccc;
+            float: left;
+            padding: 10px;
+            max-height: 100%;
+        }
+
+        .ag-arkadas-kutu:hover{
+            border: 5px solid #335466;
         }
 
         .ag-arkadas-adi{
@@ -181,7 +193,17 @@
             bottom: 0px;
             width: 100%;
             text-align: center;
-            font-size: 10px;
+            font-size: 14px;
+            background-color: #6aadcb;
+            text-shadow: 1px 1px 1px #000;
+            font-family: 'Gloria Hallelujah', cursive;
         }
+
+        .ag-rakip-sec-liste{
+            background-color: #0b404b;
+            border: 1px solid #14768a;
+        }
+
+
     </style>
 @endsection

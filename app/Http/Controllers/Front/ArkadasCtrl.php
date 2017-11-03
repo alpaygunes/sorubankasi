@@ -14,7 +14,7 @@ use DB;
 class ArkadasCtrl extends Controller
 {
     function getList(){
-        $baslik     = "Arkadaşlarım";
+        $baslik     = "Rakiplerim";
         $hepsi      = User::getArkadaslar();
         return view('front.arkadas',['baslik' => $baslik,'arkadaslarArr' => $hepsi]);
     }

@@ -5,30 +5,29 @@
     <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10" >
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
-                {{$baslik}}
+               <h1> {{$baslik}} </h1>
             </div>
         @endif
             <div class="panel ag-front-panel col-md-12">
-                <div class="row">
-                    <h2>Ödülleriniz</h2>
 
-                    <?php $odullerArr=$varliklarimArr['oduller'] ?>
-                    @foreach ( $odullerArr as $key => $value )
-                        @if($value->miktar==0)
-                            Hiç {{ $value->odul_turu }} ödülüz yok, {{ $value->odul_turu }} kazanmak için soru çözün.
-                        @else
-                            {{ $value->odul_turu }}
-                            {{ $value->miktar }}
+                <h2>Altınlarım</h2>
+                    <div class="ag-odullerim">
+                        <?php $odullerArr=$varliklarimArr['oduller'] ?>
+                        @foreach ( $odullerArr as $key => $value )
+                            @if($value->miktar==0)
+                                Hiç {{ $value->odul_turu }} ödülüz yok, {{ $value->odul_turu }} kazanmak için soru çözün.
+                            @else
+                                {{--{{ $value->odul_turu }}--}}
+                                <div class="ag-odul-txt">{{ $value->miktar }}</div>
+                            @endif
+                        @endforeach
+                        @if($odullerArr->count()==0)
+                            Hiç ödülüz yok, kazanmak için soru çözün.
                         @endif
-                    @endforeach
-                    @if($odullerArr->count()==0)
-                        Hiç ödülüz yok, kazanmak için soru çözün.
-                    @endif
+                    </div>
 
 
-                </div>
-                <div class="row">
-                    <h2>Sorularınız</h2>
+                    <h2>Sorularım</h2>
 
                     <?php
                     $sorularArr         = $varliklarimArr['sorular'];
@@ -49,12 +48,32 @@
                         @endif
                     @endforeach
 
-                    <ul>
-                        <li>Çok Kolay {{ $zorlukArr['cok_kolay'] }}</li>
-                        <li>Kolay {{ $zorlukArr['kolay'] }}</li>
-                        <li>Normal{{ $zorlukArr['normal'] }}</li>
-                        <li>Zor{{ $zorlukArr['zor'] }}</li>
-                        <li>Çok Zor{{ $zorlukArr['cok_zor'] }}</li>
+                    <ul class="ag-seviye-dugme">
+                        <li id="ag-cok-kolay-btn">
+                           {{ $zorlukArr['cok_kolay'] }}
+                            <div class="seviye-txt">Çok Kolay</div>
+                        </li>
+                        <li id="ag-kolay-btn">
+                             {{ $zorlukArr['kolay'] }}
+                            <div class="seviye-txt">Kolay</div>
+                        </li>
+                        <li id="ag-normal-btn">
+                            {{ $zorlukArr['normal'] }}
+                            <div class="seviye-txt">
+                                Normal</div>
+                        </li>
+                        <li id="ag-cok-zor-btn">
+                            {{ $zorlukArr['zor'] }}
+                            <div class="seviye-txt">
+                                Zor
+                                </div>
+                        </li>
+                        <li id="ag-zor-btn">
+                            {{ $zorlukArr['cok_zor'] }}
+                            <div class="seviye-txt">
+                                Çok zor
+                                </div>
+                        </li>
                     </ul>
 
 
@@ -63,10 +82,9 @@
 
 
 
-                    Rakiplerinize sormak için soru satın alın. Unutmayın zor sorular için daha fazla altın gerekli.
-                    <a href="#" id="ag-soru-satinal">Soru satın alın</a>
+                    <div class="ag-aciklama">Rakiplerinize sormak için soru satın alın. Unutmayın zor sorular için daha fazla altın gerekli.
+                        <br><a href="#" id="ag-soru-satinal">Soru satın alın</a></div>
                 </div>
-            </div>
     </div>
 
 
@@ -308,6 +326,81 @@
         font-size: 20px;
         border: none;
         text-align: center;
+    }
+
+    .ag-seviye-dugme{
+        position: relative;
+        display: inline-block;
+    }
+
+    .ag-seviye-dugme li{
+        position: relative;
+        list-style-type: none;
+        float: left;
+        width: 100px;
+        height: 100px;
+        margin: 30px;
+        border: 3px solid #3b81cc;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-color: #b8d4f1;
+        border: 5px solid #609db8;
+        text-align: center;
+        font-size: 40px;
+        font-family: Anton;
+        vertical-align: middle;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 50px;
+        cursor: pointer;
+    }
+
+    .seviye-txt{
+        font-family: 'Gloria Hallelujah', cursive;
+        font-size: 15px;
+        position: relative;
+        width: 100%;
+        bottom: -40px;
+        text-align: center;
+    }
+
+    #ag-kolay-btn{
+        background-image: url("/bgimages/kolay.png");
+    }
+
+    #ag-cok-kolay-btn{
+        background-image: url("/bgimages/cokkolay.png");
+    }
+
+    #ag-normal-btn{
+        background-image: url("/bgimages/normal.png");
+    }
+
+    #ag-zor-btn{
+        background-image: url("/bgimages/zor.png");
+    }
+
+    #ag-cok-zor-btn{
+        background-image: url("/bgimages/cok-zor.png");
+    }
+
+    .ag-odullerim{
+        display: block;
+        background-image: url("/bgimages/altin.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 150px;
+        margin-bottom: 50px;
+        border-bottom: 10px solid #2f4f4f;
+    }
+
+
+
+    .ag-odul-txt{
+        font-size: 80px;
+        font-family: Anton;
+        width: 100%;
+        text-align: center;
+        text-shadow: 2px 2px 5px #000;
     }
 </style>
 @endsection
