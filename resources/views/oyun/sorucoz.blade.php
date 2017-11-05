@@ -5,7 +5,8 @@
     <div class="col-sm-9 col-md-10 col-lg-10 col-xl-10" >
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
-                {{$baslik}}
+                <h1>{{$baslik}}</h1>
+                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
             <div class="panel ag-front-panel col-md-12">
@@ -25,7 +26,7 @@
                     null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
 
                     <br><br>
-                    {{ Form::submit('İleri',['class' => 'btn btn-primary ag-form-control']) }}
+                    {{ Form::submit('İleri',['class' => 'btn btn-primary ag-form-control','id'=>'ag-ileri-btn']) }}
                     {!! Form::close() !!}
 
 
@@ -215,8 +216,8 @@
             cursor: pointer;
         }
 
-        .ag-secenek{
-
+        #ag-ileri-btn{
+            font-family: Anton;
         }
 
     </style>

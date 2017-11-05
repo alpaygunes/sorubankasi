@@ -5,16 +5,19 @@
     @if(isset($baslik))
         <div class="panel ag-front-baslik-kutusu">
             <h1>{{$baslik}}</h1>
+            <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
         </div>
     @endif
-        <div id="ag-rakibiniz">Rakibiniz  {{$rakip_bilgileri->name}}</div>
+        <div id="ag-rakibiniz">Rakibiniz  <span class="ag-rakip-adi">{{$rakip_bilgileri->name}}</span></div>
     <div class="panel ag-front-panel col-md-12">
 
         <div  class="ag-aciklama">
             Rakibinize göndereceğiniz soru hangi seviyeden olsun ?
         </div>
+        <div id="ag-mesaj" class="ag-aciklama"></div>
+        <div id="ag-gonder" class="btn btn-primary" style="display: none">Soruyu Rakibine Gönder</div>
         <div id="ag-soru-seviyesi-dugmleri" class="row">
-            <h2>Sorularınızın seviyelerine göre sayıları</h2>
+            <h2>Göndermek istediğiniz soru için bir seviye seçin.</h2>
             <div class="ag-seviye-dugme" seviye="cok_kolay" id="ag-cok-kolay-btn">
                 <div class="seviye-txt">Çok kolay</div>
             </div>
@@ -31,8 +34,6 @@
                 <div class="seviye-txt">Çok zor</div>
             </div>
         </div>
-        <div id="ag-mesaj" class="ag-aciklama"></div>
-        <div id="ag-gonder" class="btn btn-primary" style="display: none">Soruyu Rakibine Gönder</div>
     </div>
 </div>
 
@@ -107,7 +108,7 @@
             seviye_int  = 5;
         }
         mesaj = "Rakibinize "+ seviye_txt +" bir soru göndereceksiniz." +
-            "<br> Bilemezse rakibinizin altınkarından bir kısmını alacaksınız." +
+            "<br> Bilemezse rakibinizin altınlarının bir kısmını alacaksınız." +
             "Doğru cevap verirse sizin altınlarınızın bir kısmını kazacak.<br>"
 
         if(soru_sayisi==0){
@@ -201,7 +202,7 @@
     }
 
     #ag-cok-zor-btn{
-        background-image: url("/bgimages/cok-zor.png");
+        background-image: url("/bgimages/cokzor.png");
     }
 
 
@@ -221,6 +222,14 @@
         margin: 20px;
         color: #fff;
     }
+
+    #ag-rakibiniz .ag-rakip-adi{
+        font-size: 35px;
+        font-family: 'Gloria Hallelujah', cursive;
+    }
+
+
+
 
 
 

@@ -75,9 +75,7 @@
         </div>
 
     <style>
-        .navbar{
-            display: none;
-        }
+
 
         .ag-form-panel {
             position: relative;

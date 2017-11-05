@@ -6,6 +6,7 @@
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                 {{$baslik}}
+                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
         <div class="panel ag-front-panel col-md-12">
@@ -28,7 +29,7 @@
                 </div>
 
             </div>
-            <h1>Bunlara cevap ver</h1>
+            <h2>Bunlara cevap ver</h2>
             <div id="ag-sira-bende" class="row duellolar-kutusu"></div>
             <h2>Sordukların</h2>
             <div id="ag-sira-rakipte" class="row duellolar-kutusu"></div>
@@ -54,8 +55,12 @@
                     </div>
                     <div class="ag-odul">
                     </div>
-                    <div class="ag-uyari"> 24 saat içinde soruya bakmak zorundasınız. Soruyu göster dedikten sonra iptal edemezsiniz.</div>
-                    <div class="btn btn-primary" id="ag-soruyu-goster"> Soruyu Göster </div>
+                    <div class="ag-uyari">
+                    </div>
+                    <div class="btn btn-primary" id="ag-soruyu-goster"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Soruyu Göster </div>
+                    <div style="font-size: 12px;color:#f00;float: right">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        Soruyu göster dedikten sonra geri sayım başlayacak.</div>
                 </div>
 
                 <div id="ag-soru">
@@ -100,7 +105,7 @@
                     </div>
                     <div class="ag-odul">
                     </div>
-                    <div class="ag-uyari"> Sonuç ? </div>
+                    <div class="ag-uyari"> Sonuç ?</div>
                     <div class="btn btn-primary" id="ag-soruyu-goster"> Soruyu Göster </div>
                 </div>
 
@@ -162,6 +167,9 @@
                         $(btn_duello).append('<div class="ag-profil-resmi-kizmizi-vs"></div>');
                         $("#ag-sira-bende").append($(btn_duello));
                     });
+                    if(duellos['bana_gelenler'].length==0){
+                        $("#ag-sira-bende").html("<div style='width: 100%;padding: 50px;text-align: center'>Size sorulan bir soru yok.</div>");
+                    }
 
                     $.each( duellos['rakibe_sorduklarim'], function( ind, val ){
                         btn_duello =  document.createElement('div');
@@ -204,8 +212,8 @@
                             }
                             $('#agDuelloDetayModal').modal('show');
                             $('#agDuelloDetayModal .ag-profil-resmi').attr('src', veri['profil_resmi'])
-                            $('#agDuelloDetayModal .ag-name').html("Soruyu gönderen " + veri['name'])
-                            $('#agDuelloDetayModal .ag-odul').html("Duello ödülü  " + veri['odul'])
+                            $('#agDuelloDetayModal .ag-name').html("Soruyu gönderen <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
+                            $('#agDuelloDetayModal .ag-odul').html("Duello ödülü   <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
                             $('#agDuelloDetayModal #ag-soruyu-goster').attr('duello_id', duello_id);
 
                             $('#agDuelloDetayModal #ag-duello-bilgisi').show();
@@ -238,8 +246,8 @@
                             }
                             $('#agGonderilenDuelloDetayModal').modal('show');
                             $('#agGonderilenDuelloDetayModal .ag-profil-resmi').attr('src', veri['profil_resmi'])
-                            $('#agGonderilenDuelloDetayModal .ag-name').html("Kime  " + veri['name'])
-                            $('#agGonderilenDuelloDetayModal .ag-odul').html("Duello ödülü  " + veri['odul'])
+                            $('#agGonderilenDuelloDetayModal .ag-name').html("Kime  <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
+                            $('#agGonderilenDuelloDetayModal .ag-odul').html("Duello ödülü  <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
                             $('#agGonderilenDuelloDetayModal #ag-soruyu-goster').attr('duello_id', duello_id);
 
                             $('#agGonderilenDuelloDetayModal #ag-duello-bilgisi').show();
@@ -424,8 +432,12 @@
             display: inline-block;
         }
 
-        .modal-body img:not(.ag-profil-resmi){
+        .modal-body #ag-metin img{
             width: 100%!important;
+        }
+
+        .modal-body  .ag-profil-resmi{
+            width: 50%!important;
         }
 
         .ag-secenek{
@@ -513,7 +525,28 @@
             padding: 3px;
         }
 
+        #ag-soruyu-goster{
+            left:35px;
+            position: relative;
+            margin-top: 50px;
+        }
 
+        .ag-gonderen{
+            font-family:'Gloria Hallelujah', cursive;
+            color: #80b9c9;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .ag-duello-odulu{
+            font-size: 40px;
+            font-family: Anton;
+            text-shadow: 2px 2px 2px #fff;
+        }
+
+        #ag-sira-bende{
+            min-height: 200px;
+        }
 
     </style>
 

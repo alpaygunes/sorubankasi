@@ -5,6 +5,7 @@
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                <h1> {{$baslik}}</h1>
+                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
 
@@ -42,7 +43,7 @@
 
     <!-- ------------------------------------  RAKİP DETAYLARINI GÖSTEREN MODAL ----------------------- -->
 
-    <div class="modal fade" id="ag-rakip-datay" tabindex="-1" role="dialog">
+{{--    <div class="modal fade" id="ag-rakip-datay" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -59,7 +60,7 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div><!-- /.modal -->--}}
 
     <!-- ---------------------------------------- son ----------------------------------------- -->
 
@@ -113,7 +114,7 @@
         var rakip_user_id=null;
         $('#ag-rakip-sec-liste').on('click','.ag-arkadas-kutu',function () {
             rakip_user_id = $(this).attr('user_id');
-            $.ajax({
+            /*$.ajax({
                 url     : '/uyelik/getKullaniciVarliklari/'+rakip_user_id,
                 dataType: 'json',
                 success : function(veri) {
@@ -147,19 +148,22 @@
                     })
 
                     $('#ag-rakip-datay').modal('toggle');
+
                 },
                 error   : function(xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                 }
-            });
+            });*/
+            url="/duello/bunusec/"+rakip_user_id;
+            window.location.href=url;
         })
 
 
         // rakip detaylarını gördükten sonra rakibi seçmeyi onayla
-        $('#ag-bunu-sec').click(function () {
+        /*$('#ag-bunu-sec').click(function () {
             url="/duello/bunusec/"+rakip_user_id
             window.location.href=url;
-        })
+        })*/
     </script>
 
     <style>

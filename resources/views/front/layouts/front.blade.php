@@ -66,7 +66,7 @@
                         <li><a href="/">Anasayfa</a></li>
                         @guest
                             <li><a href="/uyelik/giris">Giriş</a></li>
-                            <li><a href="/uyelik/kayit">Kaydet</a></li>
+                            <li><a href="/uyelik/uyeol">Kaydol</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -147,6 +147,11 @@
     $(".ag-logo").click(function () {
         window.location.href="/";
     })
+    $(".ag-anasayfa").click(function () {
+        window.location.href="/";
+    })
+
+
 </script>
 
 <style>

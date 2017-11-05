@@ -6,6 +6,7 @@
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                <h1> {{$baslik}} </h1>
+                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
             <div class="panel ag-front-panel col-md-12">
@@ -62,13 +63,13 @@
                             <div class="seviye-txt">
                                 Normal</div>
                         </li>
-                        <li id="ag-cok-zor-btn">
+                        <li id="ag-zor-btn">
                             {{ $zorlukArr['zor'] }}
                             <div class="seviye-txt">
                                 Zor
                                 </div>
                         </li>
-                        <li id="ag-zor-btn">
+                        <li id="ag-cok-zor-btn">
                             {{ $zorlukArr['cok_zor'] }}
                             <div class="seviye-txt">
                                 Çok zor
@@ -380,7 +381,7 @@
     }
 
     #ag-cok-zor-btn{
-        background-image: url("/bgimages/cok-zor.png");
+        background-image: url("/bgimages/cokzor.png");
     }
 
     .ag-odullerim{
