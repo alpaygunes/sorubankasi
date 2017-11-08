@@ -31,114 +31,119 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
 
 
 {{--///////////////////////////////////// NAV BAR //////////////////////////////////////////////////--}}
 
-         <nav class="navbar navbar-default navbar-static-top">
-                <div class="navbar-header">
+    <nav class="navbar navbar-default navbar-static-top">
+            <div class="navbar-header">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-
-                        <li><a href="/">Anasayfa</a></li>
-                        @guest
-                            <li><a href="/uyelik/giris">Giriş</a></li>
-                            <li><a href="/uyelik/uyeol">Kaydol</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Çıkış
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <a href="/profil">Profilim</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-        </nav>
-
-
-
-
-            <div class="ust">
-                <div class="ag-logo">
-                    SoruSor.co
-                </div>
+                <!-- Branding Image -->
+                <a class="navbar-brand" href="{{ url('/') }}">
+                </a>
             </div>
 
-        <div class="container">
-                @if (Auth::check())
-                    {{--@include('front.inc_menu')--}}
-                @endif
-                @yield('content')
-        </div>
+            <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    &nbsp;
+                </ul>
 
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
 
-<!-- //////////////////////////////////////     GÖNDERİLEN DUELLO DETAYI MODAL   ////////////////////////////// -->
-        <div id="agMesajBoxModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
+                    <li><a href="/">Anasayfa</a></li>
+                    @guest
+                        <li><a href="/uyelik/giris">Giriş</a></li>
+                        <li><a href="/uyelik/uyeol">Kaydol</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Duello</h4>
-                    </div>
-                    <div class="modal-body">
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        Çıkış
+                                    </a>
 
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="/profil">Profilim</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endguest
+                </ul>
+            </div>
+    </nav>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                    </div>
-                </div>
-
+    <div class="ust">
+            <div class="ag-logo">
+                SoruSor.co
             </div>
         </div>
-<!--         ------------------ MODAL SONU ------------ -->
 
-
-
-
+    <div class="container">
+            @if (Auth::check())
+                {{--@include('front.inc_menu')--}}
+            @endif
+            @yield('content')
     </div>
+
+
+<!-- //////////////////////////////////////     MESAJ MODAL - TÜM SİTEDEN ERİŞİLİ   ////////////////////////////// -->
+    <div id="agMesajBoxModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{config('app.name')}}</h4>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<!-- //////////////////////////////////////   İŞlEM DEVAME DİYOR   ////////////////////////////// -->
+    <div id="ag-islem-devam-ediyor">
+        <i class="fa fa-cog fa-spin fa-fw margin-bottom"></i>
+    </div>
+
+
+<!-- --------------------------------------- FOOTER ------------------ -->
+    <div id="ag-footer">
+        <div id="ag-iletisim">alpaygunes@gmail.com</div>
+        <div id="ag-telif">2017 - HaydiSor.co</div>
+    </div>
+</div>
 
 </body>
 </html>
@@ -151,6 +156,7 @@
         window.location.href="/";
     })
 
+    var islemBar = $('#ag-islem-devam-ediyor');
 
 </script>
 
@@ -183,6 +189,22 @@
 
     }
 
+    #ag-islem-devam-ediyor{
+        top:0px;
+        left: 0px;
+        position: absolute;
+        width: 100%;
+        font-size: 200px!important;
+        text-align: center;
+        padding-top: 25%;
+        display: none;
+    }
 
-
+    #ag-footer{
+        width: 100%;
+        background-color: #0f2c3d;
+        padding: 10px;
+        color: #194a67;
+        text-align: center;
+     }
 </style>

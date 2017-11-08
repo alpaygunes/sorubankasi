@@ -6,7 +6,7 @@
 
     @if(isset($baslik))
         <div class="panel ag-front-baslik-kutusu">
-            {{$baslik}}
+            <h1>{{$baslik}}</h1>
             <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
         </div>
     @endif
@@ -33,18 +33,18 @@
         'class' => 'form',
         'novalidate' => 'novalidate',
         'files' => true))!!}
-        <div class="form-group">
+        <div class="form-group duellolar-kutusu">
             <div class="row">
                 <div class="col-xs-6 col-md-3 col-lg-3">
                     {!! Form::label('profilresmi', 'Profil Resminiz',['class' => 'ag-label']) !!}
                     <img id="ag-profil-resmi" class="img-thumbnail" src="{{ isset($profilArr->profil_resmi)?$profilArr->profil_resmi:'images/noimage.png' }}">
                     {{ Form::file('profilresmi', ['class' => 'invisible']) }}
-                    <a href="#" id="ag-resmi-degistir">Profil Resmini Değiştir</a>
+                    <a href="#" id="ag-resmi-degistir">Değiştir</a> |
+                    <a href="#" id="ag-avatar-secin">Avatar seç</a>
                 </div>
             </div>
         </div>
-        <br><br>
-        <div class="form-group">
+        <div class="form-group duellolar-kutusu">
             {!! Form::label('sinif', 'Sınıfınız',['class' => 'ag-label']) !!}
             {{ Form::select('sinif', array('4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','10'=>'10','11'=>'11','12'=>'12','13'=>'13','14'=>'14'),
             isset($profilArr->sinif)?$profilArr->sinif:null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
@@ -52,7 +52,7 @@
 
 
         <br><br>
-        {{ Form::submit('Kaydet',['class' => 'btn btn-primary ag-form-control']) }}
+        {{ Form::submit('Kaydet',['class' => 'btn btn-primary ag-form-control ag-kaydet']) }}
         {!! Form::close() !!}
 
 
@@ -63,4 +63,16 @@
         $('#profilresmi').trigger('click');
     })
 </script>
+
+    <style>
+        #ag-avatar-secin{
+            bor
+        }
+
+        .ag-kaydet{
+            font-family: Anton;
+            font-size: 25px;
+        }
+
+    </style>
 @endsection

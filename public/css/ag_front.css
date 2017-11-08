@@ -143,14 +143,13 @@ h2{
 
 .ag-front-panel{
     position: relative;
-    float: left;
     min-height:600px;
     background-color: #395858;
     box-shadow: 0!important;
     border-radius: 5px!important;
     color: #fff;
     border: 0px!important;
-    padding: 20px;
+    padding: 60px;
 }
 
 .ag-front-panel .btn{
@@ -207,7 +206,9 @@ h2{
 
 .duellolar-kutusu{
     background-color: #0b404b;
-    border: 1px solid #14768a;
+    border: 1px solid #2f4f4f;
+    border-bottom: 10px solid #2f4f4f;
+    padding: 20px;
 }
 
 

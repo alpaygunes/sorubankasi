@@ -46,9 +46,11 @@
             dataType: 'html',
             beforeSend: function() {
                 $('#ag-ara').attr("disabled", true);
+                islemBar.show();
             },
             complete: function() {
                 $('#ag-ara').attr("disabled", false);
+                islemBar.hide();
             },
             success: function(json) {
                 $('#ag-arama-sonuclari').html(json)

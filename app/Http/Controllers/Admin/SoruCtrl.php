@@ -18,7 +18,6 @@ class SoruCtrl extends Controller
 {
     public function __construct()
     {
-        $this->middleware('IsAdmin');
     }
 
     ##################           KONU EKLEME VE DÜZENLEME  ################

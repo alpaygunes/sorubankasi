@@ -9,7 +9,7 @@
                 <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
-            <div class="panel ag-front-panel col-md-12">
+            <div class="panel ag-front-panel col-md-12 " id="ag-soru-paneli">
 
 <!--  -------------------------------------        FORM          --------------------------------------------  -->
 
@@ -22,7 +22,7 @@
                     {{ Form::select('sinif', array(''=>'Sınıf Seçin','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','10'=>'10','11'=>'11','12'=>'12','13'=>'13','14'=>'14'),
                     null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
                     {!! Form::label('zorluk', 'Zorluk Seviyesi',['class' => 'ag-label']) !!}
-                    {{ Form::select('zorluk', array('0'=>'Karışık','1'=>'1-Çok kolay','2'=>'2','3'=>'3','4'=>'4','5'=>'5-Çok zor'),
+                    {{ Form::select('zorluk', array('0'=>'Farketmez','1'=>'1-Çok kolay','2'=>'2','3'=>'3','4'=>'4','5'=>'5-Çok zor'),
                     null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
 
                     <br><br>
@@ -48,11 +48,11 @@
 <!--  -------------------------------------        GEÇİŞ EKRANI          --------------------------------------------  -->
                 <div id="ag-gecis-ekrani">
                     <div id="ag-gecis-ekrani-baslik" class="panel-head">
-                        Geçiş Ekranı
+
                     </div>
                     <div>
-                        Burada başarı animasyonu konulacak.
-                         <div class="ag-dogru-sayisi"></div>
+                        <img src="/bgimages/kazandin1.gif">
+                        <div class="ag-dogru-sayisi"></div>
                     </div>
                     <div class="btn btn-primary ag-btn-devam"  >Devam</div>
                 </div>
@@ -61,13 +61,13 @@
 <!--  -------------------------------------        SONUÇ EKRANI          --------------------------------------------  -->
                 <div id="ag-sonuc-ekrani">
                     <div id="ag-sonuc-ekrani-baslik" class="panel-head">
-                        Sonuc Ekranı
+
                     </div>
                     <div>
-                        Burada kaybetme animasyonu konulacak.
+                        <img src="/bgimages/kaybettin0.gif">
                         <div class="ag-dogru-sayisi"></div>
                     </div>
-                    <div class="btn btn-primary ag-btn-konuyu-degistir" >Konuyu Değiştir</div>
+                    <div class="btn btn-primary ag-btn-konuyu-degistir" >Yeniden</div>
                 </div>
 
 
@@ -82,13 +82,17 @@
             $('#ag-gecis-ekrani').hide();
             $('#ag-soru-ekrani').hide();
             $('#ag-sonuc-ekrani').hide();
+
+            $('html, body').animate({
+                scrollTop: $(document).height()
+            }, 1500);
         })
         //---------------------------------------------------------------
         $('#dersler').change(function () {
             //dere ait konuları getir.
             ders_id = $(this).val();
             $.getJSON( "/admin/konu/getKonu/"+ders_id, function( data ) {
-
+                console.log(data)
                 $('#konu_id').each(function() {
                     $(this).find('option').remove();
                 });
@@ -116,7 +120,8 @@
                 success: function( response ) {
                     console.log(response)
                     if(response['soruyok']==1){
-                        alert("Soru Yok")
+                        $('#agMesajBoxModal').modal('show')
+                        $('#agMesajBoxModal .modal-body').html("Seçtiğiniz kriterlere uygun soru bulamadık.")
                     }else{
                         $soruArr = response;
                         oyun_status = 'sorular_yuklendi';
@@ -138,11 +143,11 @@
                 if(response['soruyok']==1){
                     alert("Soru Yok")
                 }else if(response['yanlis_cevap']==1) {
-                    $('.ag-dogru-sayisi').html(response['dogru_cevap_sayisi'])
+                    //$('.ag-dogru-sayisi').html(response['dogru_cevap_sayisi'])
                     $('#ag-soru-ekrani').hide();
                     $('#ag-sonuc-ekrani').show();
                 }else if(response['dogru_cevap']==1) {
-                    $('.ag-dogru-sayisi').html(response['dogru_cevap_sayisi'])
+                    //$('.ag-dogru-sayisi').html(response['dogru_cevap_sayisi'])
                     $('#ag-soru-ekrani').hide();
                     $('#ag-gecis-ekrani').show();
                 }else{
@@ -172,6 +177,7 @@
                 $('#ag-gecis-ekrani').hide();
             });
         })
+
     </script>
 
 <style>
@@ -202,22 +208,63 @@
             bottom: 0px;
             margin-left: auto;
             margin-right: auto;
-            width: 200px;
+            width: 400px;
         }
 
         .ag-secenek{
-            width: 30px;
-            height: 30px;
-            border: 1px solid #1f648b;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #bcbcbc;
             float: left;
             text-align: center;
-            margin: 5px;
-            padding: 5px;
+            margin: 7px;
+            padding: 3px;
             cursor: pointer;
+            font-size: 35px;
+            background-color: #70b3d1;
+            text-shadow: 1px 1px 1px #000;
+            border-radius: 10px;
+            color: #fff;
         }
 
-        #ag-ileri-btn{
+        .ag-secenek:hover{
+            background-color: #6aaac6;
+        }
+
+        #ag-soru-kutusu{
+            font-size: 25px;
+        }
+
+        #ag-ileri-btn, .ag-btn-devam, .ag-btn-konuyu-degistir{
             font-family: Anton;
+            font-size: 25px;
+        }
+
+        .ag-btn-konuyu-degistir, .ag-btn-devam{
+            position: relative;
+            bottom: -100px;
+        }
+
+        .form-control{
+            font-size: 20px!important;
+            height: 40px!important;
+        }
+
+        .ag-label{
+            margin-top: 25px!important;
+        }
+
+        #ag-gecis-ekrani, #ag-sonuc-ekrani{
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        #ag-soru-paneli{
+            box-shadow: 10px 10px 60px #000;
+            background-color: #fff;
+            color: #000;
+            border:5px solid #71b9d9;
         }
 
     </style>

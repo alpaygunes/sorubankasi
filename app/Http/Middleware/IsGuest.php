@@ -7,7 +7,7 @@ use DB;
 use Session;
 use App\User;
 
-class IsMember
+class IsGuest
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class IsMember
     public function handle($request, Closure $next)
     {
         $user_role          = User::getUserYetki();
-        if($user_role=='uye' || $user_role=='admin'){
+        if($user_role==null){
             return $next($request);
         }
         return redirect('/');

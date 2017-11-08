@@ -10,14 +10,13 @@
     @endif
         <div id="ag-rakibiniz">Rakibiniz  <span class="ag-rakip-adi">{{$rakip_bilgileri->name}}</span></div>
     <div class="panel ag-front-panel col-md-12">
-
-        <div  class="ag-aciklama">
-            Rakibinize göndereceğiniz soru hangi seviyeden olsun ?
-        </div>
+        <h2>Göndermek istediğiniz soru için bir seviye seçin.</h2>
         <div id="ag-mesaj" class="ag-aciklama"></div>
-        <div id="ag-gonder" class="btn btn-primary" style="display: none">Soruyu Rakibine Gönder</div>
-        <div id="ag-soru-seviyesi-dugmleri" class="row">
-            <h2>Göndermek istediğiniz soru için bir seviye seçin.</h2>
+        <div id="ag-gonder" class="btn btn-primary" style="display: none">
+            <i class="fa fa-rocket fa-2x" aria-hidden="true"></i>
+            Gönder</div>
+<br>
+        <div id="ag-soru-seviyesi-dugmleri" class="row duellolar-kutusu">
             <div class="ag-seviye-dugme" seviye="cok_kolay" id="ag-cok-kolay-btn">
                 <div class="seviye-txt">Çok kolay</div>
             </div>
@@ -48,10 +47,10 @@
             url: '/varliklarim/json',
             dataType: 'json',
             beforeSend: function() {
-
+                islemBar.show();
             },
             complete: function() {
-
+                islemBar.hide();
             },
             success: function(veri) {
                console.log(veri)
@@ -139,7 +138,9 @@
                     $('#agMesajBoxModal .modal-title').html('UYARI !')
 
                 }else{
-                    alert("soru gönderildi")
+                    $('#agMesajBoxModal').modal('show')
+                    $('#agMesajBoxModal .modal-body').html('Soru gönderildi.')
+                    $('#agMesajBoxModal .modal-title').html('Mesaj !')
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -211,7 +212,8 @@
     }
 
     #ag-gonder{
-        margin-top: 50px;
+        margin-top: 20px;
+        margin-bottom:20px;
         font-size: 18px;
         font-family: Anton;
     }

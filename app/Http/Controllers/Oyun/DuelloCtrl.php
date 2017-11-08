@@ -167,6 +167,19 @@ class DuelloCtrl extends Controller
 
             $kalan_zaman = $this->surecKontrol(0);
             if($kalan_zaman<=0){
+                if($kalan_zaman<=0){
+                    $duello_odul       = Session::get('duello_odul');
+                    // kendi ödülü azalacak
+                    OdulToUser::kullaniciOdulunuGuncelle(Auth::user()->id,'altin',-$duello_odul);
+                    // rakibin ödülü artacak
+                    OdulToUser::kullaniciOdulunuGuncelle(Session::get('duello_gonderen_id'),'altin',$duello_odul);
+                    // duello durumu değişecek
+
+                    $kazanan_id         = Session::get('duello_gonderen_id');
+                    $duello             = Duello::find($duello_id);
+                    $duello->kazanan_id = $kazanan_id;
+                    $duello->save();
+                }
                 return Response::json(array('hata'=>'zaman_bitti'));
             }
 
@@ -246,7 +259,7 @@ class DuelloCtrl extends Controller
             return Response::json(array('hata'=>'zaman_bitti'));
         }else{
             return Response::json(array('duello_sorumetni'=>$duello_sorumetni
-                                        ,'soru_turu'=>$soru_turu));
+                                        ,'soru_turu'=>$soru_turu,'kalan_zaman'=>$kalan_zaman));
         }
     }
 
@@ -271,6 +284,7 @@ class DuelloCtrl extends Controller
         }else{
             $kalan_zaman =  $duello->son_cevaplama_zamani -  time();
         }
+
         return $kalan_zaman;
     }
 
@@ -302,16 +316,18 @@ class DuelloCtrl extends Controller
         }
 
         $duello             =  Duello::find($duello_id);
-        $duello->kazanan_id = $kazanan_id;
-        $duello->save();
-
-        Session::forget('duello_id');
-        Session::forget('duello_sorumetni');
-        Session::forget('duello_soru_turu');
-        Session::forget('duello_soru_dogru_secenek');
-        Session::forget('duello_soru_sure');
-        Session::forget('duello_gonderen_id');
-        Session::forget('duello_odul');
+        // zaten cevap vermiş ve kazanan belirlenmişse
+        if($duello->kazanan_id==null){
+            $duello->kazanan_id = $kazanan_id;
+            $duello->save();
+            Session::put('duello_id',0);
+            Session::put('duello_sorumetni',0);
+            Session::put('duello_soru_turu',0);
+            Session::put('duello_soru_dogru_secenek',0);
+            Session::put('duello_soru_sure',0);
+            Session::put('duello_gonderen_id',0);
+            Session::put('duello_odul',0);
+        }
 
         return Response::json(array('sonuc'=>$dogru));
     }

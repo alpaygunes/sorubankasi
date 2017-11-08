@@ -12,7 +12,7 @@
             <div class="panel ag-front-panel col-md-12">
 
                 <h2>Altınlarım</h2>
-                    <div class="ag-odullerim">
+                    <div class="ag-odullerim duellolar-kutusu">
                         <?php $odullerArr=$varliklarimArr['oduller'] ?>
                         @foreach ( $odullerArr as $key => $value )
                             @if($value->miktar==0)
@@ -28,62 +28,62 @@
                     </div>
 
 
-                    <h2>Sorularım</h2>
+                <h2>Sorularım</h2>
+                    <div class="duellolar-kutusu">
+                        <?php
+                        $sorularArr         = $varliklarimArr['sorular'];
+                        $zorlukArr          = array('cok_kolay'=>0,'kolay'=>0,'normal'=>0,'zor'=>0,'cok_zor'=>0);
+                        ?>
+                        Size ait {!!   count($sorularArr) !!} tane soru bulunmakta.<br>
+                        @foreach ( $sorularArr as $key => $value )
+                            @if($value->zorluk==1)
+                                <?php $zorlukArr['cok_kolay']++?>
+                            @elseif($value->zorluk==2)
+                                <?php $zorlukArr['kolay']++?>
+                            @elseif($value->zorluk==3)
+                                <?php $zorlukArr['normal']++?>
+                            @elseif($value->zorluk==4)
+                                <?php $zorlukArr['zor']++?>
+                            @elseif($value->zorluk==5)
+                                <?php $zorlukArr['cok_zor']++?>
+                            @endif
+                        @endforeach
 
-                    <?php
-                    $sorularArr         = $varliklarimArr['sorular'];
-                    $zorlukArr          = array('cok_kolay'=>0,'kolay'=>0,'normal'=>0,'zor'=>0,'cok_zor'=>0);
-                    ?>
-                    Size ait {!!   count($sorularArr) !!} tane soru bulunmakta.<br>
-                    @foreach ( $sorularArr as $key => $value )
-                        @if($value->zorluk==1)
-                            <?php $zorlukArr['cok_kolay']++?>
-                        @elseif($value->zorluk==2)
-                            <?php $zorlukArr['kolay']++?>
-                        @elseif($value->zorluk==3)
-                            <?php $zorlukArr['normal']++?>
-                        @elseif($value->zorluk==4)
-                            <?php $zorlukArr['zor']++?>
-                        @elseif($value->zorluk==5)
-                            <?php $zorlukArr['cok_zor']++?>
-                        @endif
-                    @endforeach
-
-                    <ul class="ag-seviye-dugme">
-                        <li id="ag-cok-kolay-btn">
-                           {{ $zorlukArr['cok_kolay'] }}
-                            <div class="seviye-txt">Çok Kolay</div>
-                        </li>
-                        <li id="ag-kolay-btn">
-                             {{ $zorlukArr['kolay'] }}
-                            <div class="seviye-txt">Kolay</div>
-                        </li>
-                        <li id="ag-normal-btn">
-                            {{ $zorlukArr['normal'] }}
-                            <div class="seviye-txt">
-                                Normal</div>
-                        </li>
-                        <li id="ag-zor-btn">
-                            {{ $zorlukArr['zor'] }}
-                            <div class="seviye-txt">
-                                Zor
-                                </div>
-                        </li>
-                        <li id="ag-cok-zor-btn">
-                            {{ $zorlukArr['cok_zor'] }}
-                            <div class="seviye-txt">
-                                Çok zor
-                                </div>
-                        </li>
-                    </ul>
-
-
-
+                        <ul class="ag-seviye-dugme">
+                            <li id="ag-cok-kolay-btn">
+                               {{ $zorlukArr['cok_kolay'] }}
+                                <div class="seviye-txt">Çok Kolay</div>
+                            </li>
+                            <li id="ag-kolay-btn">
+                                 {{ $zorlukArr['kolay'] }}
+                                <div class="seviye-txt">Kolay</div>
+                            </li>
+                            <li id="ag-normal-btn">
+                                {{ $zorlukArr['normal'] }}
+                                <div class="seviye-txt">
+                                    Normal</div>
+                            </li>
+                            <li id="ag-zor-btn">
+                                {{ $zorlukArr['zor'] }}
+                                <div class="seviye-txt">
+                                    Zor
+                                    </div>
+                            </li>
+                            <li id="ag-cok-zor-btn">
+                                {{ $zorlukArr['cok_zor'] }}
+                                <div class="seviye-txt">
+                                    Çok zor
+                                    </div>
+                            </li>
+                        </ul>
+                    </div>
 
 
 
 
-                    <div class="ag-aciklama">Rakiplerinize sormak için soru satın alın. Unutmayın zor sorular için daha fazla altın gerekli.
+
+
+                <div class="ag-aciklama">Rakiplerinize sormak için soru satın alın. Unutmayın zor sorular için daha fazla altın gerekli.
                         <br><a href="#" id="ag-soru-satinal">Soru satın alın</a></div>
                 </div>
     </div>
@@ -288,9 +288,11 @@
             dataType: 'json',
             beforeSend: function() {
                 $('#ag-onayla').attr("disabled", true);
+                islemBar.show();
             },
             complete: function() {
                 $('#ag-onayla').attr("disabled", false);
+                islemBar.hide();
             },
             success: function(json) {
                 console.log(json)
@@ -340,7 +342,7 @@
         float: left;
         width: 100px;
         height: 100px;
-        margin: 30px;
+        margin: 25px;
         border: 3px solid #3b81cc;
         background-size: 100%;
         background-repeat: no-repeat;
@@ -352,7 +354,6 @@
         vertical-align: middle;
         text-shadow: 1px 1px 1px #000;
         border-radius: 50px;
-        cursor: pointer;
     }
 
     .seviye-txt{
@@ -389,7 +390,7 @@
         background-image: url("/bgimages/altin.png");
         background-repeat: no-repeat;
         background-position: center;
-        min-height: 150px;
+        min-height: 300px;
         margin-bottom: 50px;
         border-bottom: 10px solid #2f4f4f;
     }

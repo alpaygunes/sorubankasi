@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="col-sm-12 col-md-10 col-lg-10 col-xl-10" >
+<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12" >
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                 {{$baslik}}
@@ -50,17 +50,26 @@
             </div>
             <div class="modal-body">
                 <div id="ag-duello-bilgisi">
-                    <img class="ag-profil-resmi" src="">
-                    <div class="ag-name">
-                    </div>
-                    <div class="ag-odul">
-                    </div>
-                    <div class="ag-uyari">
-                    </div>
-                    <div class="btn btn-primary" id="ag-soruyu-goster"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Soruyu Göster </div>
+                    <table class="table borderless">
+                        <tr>
+                            <td style="vertical-align: top;width: 250px">
+                                <img class="ag-profil-resmi" src="">
+                            </td>
+                            <td>
+                                <div class="ag-name">
+                                </div>
+                                <div class="ag-odul">
+                                </div>
+                                <div class="ag-uyari">
+                                </div>
+                                <div class="btn btn-primary" id="ag-soruyu-goster"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Soruyu Göster </div>
+                            </td>
+                        </tr>
+                    </table>
                     <div style="font-size: 12px;color:#f00;float: right">
                         <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                        Soruyu göster dedikten sonra geri sayım başlayacak.</div>
+                        Soruyu göster dedikten sonra geri sayım başlayacak.
+                    </div>
                 </div>
 
                 <div id="ag-soru">
@@ -100,14 +109,21 @@
             </div>
             <div class="modal-body">
                 <div id="ag-duello-bilgisi">
-                    <img class="ag-profil-resmi" src="">
-                    <div class="ag-name">
-                    </div>
-                    <div class="ag-odul">
-                    </div>
-                    <div class="ag-uyari"> Sonuç ?</div>
-                    <div class="btn btn-primary" id="ag-soruyu-goster"> Soruyu Göster </div>
-                </div>
+                    <table class="table borderless">
+                        <tr >
+                            <td style="vertical-align: top;width: 250px">
+                                <img class="ag-profil-resmi" src="">
+                            </td>
+                            <td>
+                                <div class="ag-name">
+                                </div>
+                                <div class="ag-odul">
+                                </div>
+                                <div class="ag-uyari"></div>
+                                <div class="btn btn-primary" id="ag-soruyu-goster"> Soruyu Göster </div>
+                            </td>
+                        </tr>
+                    </table>
 
                 <div id="ag-soru">
                     <div id="ag-metin">
@@ -116,14 +132,15 @@
                 </div>
 
             </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
             </div>
         </div>
 
     </div>
-</div>
 
+</div>
 
 
 
@@ -149,10 +166,10 @@
                 url: '/duello/getUserDuellos/',
                 dataType: 'json',
                 beforeSend: function() {
-
+                    islemBar.show();
                 },
                 complete: function() {
-
+                    islemBar.hide();
                 },
                 success: function(duellos) {
                     console.log(duellos)
@@ -185,6 +202,12 @@
                         $(btn_duello).append('<div class="ag-profil-resmi-sari-vs"></div>');
                         $("#ag-sira-rakipte").append($(btn_duello));
                     });
+
+                    if(duellos['rakibe_sorduklarim'].length==0){
+                        $("#ag-sira-rakipte").html("<div style='width: 100%;padding: 50px;text-align: center'>" +
+                            "Rakibinize bir soru önderin. Listeniz şimdilik boş." +
+                            "</div>");
+                    }
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -192,6 +215,8 @@
             });
         }
 
+
+        var duello_id=null;
         function onClickKutu() {
             // bana gelenlere tıklanınca
             $('.panel').on('click','.ag-kutu-bana-gelenler',function () {
@@ -205,7 +230,11 @@
                     },
                     success: function(veri) {
                         if(veri['hata']){
-                            alert(veri['hata'])
+                            if(veri['hata']=='zaman_bitti'){
+                                $('#agMesajBoxModal').modal('show')
+                                $('#agMesajBoxModal .modal-body').html("<img src='/bgimages/zamanbitti.gif'>")
+                                $('*[duello_id='+duello_id+']').hide();
+                            }
                         }else {
                             if (veri['profil_resmi'] == null) {
                                 veri['profil_resmi'] = '/images/noimage.png'
@@ -213,7 +242,7 @@
                             $('#agDuelloDetayModal').modal('show');
                             $('#agDuelloDetayModal .ag-profil-resmi').attr('src', veri['profil_resmi'])
                             $('#agDuelloDetayModal .ag-name').html("Soruyu gönderen <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
-                            $('#agDuelloDetayModal .ag-odul').html("Duello ödülü   <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
+                            $('#agDuelloDetayModal .ag-odul').html("Ödül   <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
                             $('#agDuelloDetayModal #ag-soruyu-goster').attr('duello_id', duello_id);
 
                             $('#agDuelloDetayModal #ag-duello-bilgisi').show();
@@ -228,6 +257,7 @@
 
             // gönderiklerime tıklanınca
             $('.panel').on('click','.ag-kutu-gonderiklerim',function () {
+                bukutu = $(this);
                 duello_id= $(this).attr('duello_id');
                 $.ajax({
                     url: '/duello/gonderdigimHamleyiGor/'+duello_id,
@@ -239,7 +269,8 @@
                     success: function(veri) {
                         console.log(veri)
                         if(veri['hata']){
-                            alert(veri['hata'])
+                            $('#agMesajBoxModal').modal('show')
+                            $('#agMesajBoxModal .modal-body').html(veri['hata'])
                         }else if(veri['kazandin']==0) {
                             if (veri['profil_resmi'] == null) {
                                 veri['profil_resmi'] = '/images/noimage.png'
@@ -247,15 +278,19 @@
                             $('#agGonderilenDuelloDetayModal').modal('show');
                             $('#agGonderilenDuelloDetayModal .ag-profil-resmi').attr('src', veri['profil_resmi'])
                             $('#agGonderilenDuelloDetayModal .ag-name').html("Kime  <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
-                            $('#agGonderilenDuelloDetayModal .ag-odul').html("Duello ödülü  <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
+                            $('#agGonderilenDuelloDetayModal .ag-odul').html("Ödül  <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
                             $('#agGonderilenDuelloDetayModal #ag-soruyu-goster').attr('duello_id', duello_id);
 
                             $('#agGonderilenDuelloDetayModal #ag-duello-bilgisi').show();
                             $('#agGonderilenDuelloDetayModal #ag-soru').hide();
                         }else if(veri['kazandin']==1){
-                            alert("kazandin")
+                            $('#agMesajBoxModal').modal('show')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin0.gif">')
+                            bukutu.hide();
                         }else{
-                            alert("Kaybettin")
+                            bukutu.hide();
+                            $('#agMesajBoxModal').modal('show')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin0.gif">')
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
@@ -268,7 +303,7 @@
         }
 
         function onClickSoruyuGoster() {
-            // gönderilen soruyü göser
+            // gelen soruyü göser
             $('#agDuelloDetayModal #ag-soruyu-goster').click(function () {
                 duello_id= $(this).attr('duello_id');
                 $.ajax({
@@ -336,8 +371,16 @@
                     },
                     success: function(veri) {
                         console.log(veri)
-                        alert(veri['sonuc'] + " Burada başarı ekranı gelecek yada başarısızlık. altınlar birinden diğerine geçecek" )
+                        //alert(veri['sonuc'] + " Burada başarı ekranı gelecek yada başarısızlık. altınlar birinden diğerine geçecek" )
                         $('#agDuelloDetayModal').modal('hide')
+                        $('*[duello_id='+duello_id+']').hide();
+                        $('#agMesajBoxModal').modal('show')
+                        if(veri['sonuc']=='dogru'){
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin1.gif">')
+                        }else{
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin1.gif">')
+                        }
+                        $('#agMesajBoxModal .modal-title').html('UYARI !')
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
@@ -437,7 +480,7 @@
         }
 
         .modal-body  .ag-profil-resmi{
-            width: 50%!important;
+            width: 100%!important;
         }
 
         .ag-secenek{
@@ -545,6 +588,10 @@
         }
 
         #ag-sira-bende{
+            min-height: 200px;
+        }
+
+        #ag-sira-rakipte{
             min-height: 200px;
         }
 
