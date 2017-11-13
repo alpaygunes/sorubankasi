@@ -14,6 +14,8 @@ use Session;
 
 class SoruCozCtrl extends Controller
 {
+    public $odul_carpani = 100;
+
     function index()
     {
         $baslik = "Soru Çöz";
@@ -77,17 +79,16 @@ class SoruCozCtrl extends Controller
         $gonderilmisSoruIdArr[]     = $soru->id;
         $request->session()->put('gonderilen_soru', $soru);
         $request->session()->put('gonderilmisSoruIdArr', $gonderilmisSoruIdArr);
+        $soru->odul  = $soru->zorluk * $this->odul_carpani;
         return $soru;
     }
-
-
 
     function cevapKontrol($yanit,Request $request){
         $gonderilmis_soru = $request->session()->get('gonderilen_soru');
         $request->session()->forget('gonderilen_soru');
         $user_id                        = Auth::user()->id;
-        $odul_turu      = 'altin';
-        $miktar         = 100*$gonderilmis_soru->zorluk;
+        $odul_turu                      = 'altin';
+        $miktar                         = $this->odul_carpani * $gonderilmis_soru->zorluk;
         if(strtolower($yanit)==strtolower($gonderilmis_soru->yanit)){
             $dogru_cevap_sayisi = $request->session()->get('dogru_cevap_sayisi');
             $dogru_cevap_sayisi++;
@@ -101,7 +102,7 @@ class SoruCozCtrl extends Controller
         }else{
             $sonuc['yanlis_cevap']          = 1;
             $sonuc['dogru_cevap_sayisi']    = $request->session()->get('dogru_cevap_sayisi');
-            $miktar = -$miktar;
+            $miktar = - ceil($miktar/4);
             OdulToUser::kullaniciOdulunuGuncelle($user_id,$odul_turu,$miktar);
             return Response::json($sonuc);
         }

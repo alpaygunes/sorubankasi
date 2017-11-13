@@ -11,6 +11,13 @@
         @endif
             <div class="panel ag-front-panel col-md-12">
 
+                <div class="ag-aciklama">Rakiplerinize sormak için soru satın alın. Unutmayın zor sorular için daha fazla altın gerekli.
+                    <br><a href="#" class="btn btn-success ag-soru-satinal" >
+                        <i class="fa fa-shopping-cart" style="margin-right: 20px" aria-hidden="true"></i>
+                        Soru satın alın</a>
+                </div>
+
+
                 <h2>Altınlarım</h2>
                     <div class="ag-odullerim duellolar-kutusu">
                         <?php $odullerArr=$varliklarimArr['oduller'] ?>
@@ -25,6 +32,9 @@
                         @if($odullerArr->count()==0)
                             Hiç ödülüz yok, kazanmak için soru çözün.
                         @endif
+                            <br>
+                            <a href="/sorucoz/giris" class="btn btn-success" id="ag-soru-sorucoz">
+                                Soru çözün</a>
                     </div>
 
 
@@ -76,16 +86,12 @@
                                     </div>
                             </li>
                         </ul>
+                        <br><a href="#" class="btn btn-success ag-soru-satinal" >
+                                <i class="fa fa-shopping-cart" style="margin-right: 20px" aria-hidden="true"></i>
+                                Soru satın alın</a>
                     </div>
 
-
-
-
-
-
-                <div class="ag-aciklama">Rakiplerinize sormak için soru satın alın. Unutmayın zor sorular için daha fazla altın gerekli.
-                        <br><a href="#" id="ag-soru-satinal">Soru satın alın</a></div>
-                </div>
+            </div>
     </div>
 
 
@@ -191,6 +197,7 @@
     </div>
     <!-- --------------------------------------- SORU MODALI SON ---------------------------------------- -->
 
+
 <script>
     var odullerArr = new Array();
     // php den gelen verileri jqueryde kullanmak için
@@ -204,17 +211,13 @@
 </script>
 
 
-
-
-
-
 <script>
     $(document).ready(function () {
         $('#ag-fiyat-tablolari').show();
         $('#ag-onay_ekrani').hide();
         $('#ag-geri').hide();
     })
-    $('#ag-soru-satinal').click(function () {
+    $('.ag-soru-satinal').click(function () {
         $('#myModal').modal('show');
         $('#ag-fiyat-tablolari').show();
         $('#ag-onay_ekrani').hide();
@@ -317,13 +320,6 @@
     })
 </script>
 
-
-
-
-
-
-
-
 <style>
     #ag-onay_ekrani input[type="number"]{
         font-size: 20px;
@@ -342,7 +338,7 @@
         float: left;
         width: 100px;
         height: 100px;
-        margin: 25px;
+        margin: 20px;
         border: 3px solid #3b81cc;
         background-size: 100%;
         background-repeat: no-repeat;
@@ -404,5 +400,18 @@
         text-align: center;
         text-shadow: 2px 2px 5px #000;
     }
+
+    .ag-soru-satinal{
+        font-family: Anton;
+        font-size: 16px;
+    }
+
+    #ag-soru-sorucoz{
+        font-family: Anton;
+        font-size: 16px;
+        position: absolute;
+        bottom:0px;
+    }
 </style>
+
 @endsection

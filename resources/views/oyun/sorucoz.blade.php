@@ -32,6 +32,7 @@
 
 <!--  -------------------------------------        SORU EKRANI          --------------------------------------------  -->
                 <div id="ag-soru-ekrani" class="col-12">
+                    <div id="ag-soru-odulu"></div>
                     <div id="ag-soru-kutusu">
 
                     </div>
@@ -50,11 +51,28 @@
                     <div id="ag-gecis-ekrani-baslik" class="panel-head">
 
                     </div>
-                    <div>
-                        <img src="/bgimages/kazandin1.gif">
-                        <div class="ag-dogru-sayisi"></div>
-                    </div>
-                    <div class="btn btn-primary ag-btn-devam"  >Devam</div>
+                    <table class="table borderless" style="height: 450px">
+                        <tr>
+                            <td colspan="3">
+                                <div>
+                                    <img id="ag-kazandin-img" src="/bgimages/kazandin1.gif">
+                                    <div class="ag-dogru-sayisi"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 75px" id="anim-alani-sol"></td>
+                            <td style="height: 75px" id="anim-alani-orta"></td>
+                            <td style="height: 75px" id="anim-alani-sag"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <div class="btn btn-primary ag-btn-devam"  >Devam</div>
+                            </td>
+                        </tr>
+                    </table>
+
+
                 </div>
 
 
@@ -63,22 +81,51 @@
                     <div id="ag-sonuc-ekrani-baslik" class="panel-head">
 
                     </div>
-                    <div>
-                        <img src="/bgimages/kaybettin0.gif">
-                        <div class="ag-dogru-sayisi"></div>
-                    </div>
-                    <div class="btn btn-primary ag-btn-konuyu-degistir" >Yeniden</div>
+                    <table class="table borderless" style="height: 450px">
+                        <tr>
+                            <td>
+                                <img  id="ag-kaybettin-img"  src="/bgimages/kaybettin0.gif">
+                                <div class="ag-dogru-sayisi"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="ag-kaybettin-orta">
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="btn btn-primary ag-btn-konuyu-degistir" >Yeniden</div>
+                            </td>
+                        </tr>
+                    </table>
+
+
                 </div>
 
 
             </div>
     </div>
 
+    <audio id="ses-sihir">
+        <source src="/sesler/sihir.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="ses-yanlis">
+        <source src="/sesler/yanlis.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
-    <script>
+
+<script>
 
         //--------------------------------------------------------------
         $(document).ready(function () {
+            // kaybetme ve kaznama resimlerinin resagele belirmlenmesi içn
+            resim_no = Math.floor((Math.random() * 11) + 1);
+            $('#ag-kaybettin-img').attr('src','/bgimages/kaybettin'+resim_no+'.gif')
+            $('#ag-kazandin-img').attr('src','/bgimages/kazandin'+resim_no+'.gif')
+
             $('#ag-gecis-ekrani').hide();
             $('#ag-soru-ekrani').hide();
             $('#ag-sonuc-ekrani').hide();
@@ -110,6 +157,7 @@
         //---------------------------------------------------------------
         var $soruArr = new Array();
         var oyun_status = 'giris';
+        var soru_odulu=0;
         $('#sorucozFrm').submit( function(e){
             e.preventDefault();
             form    = $(this);
@@ -123,12 +171,14 @@
                         $('#agMesajBoxModal').modal('show')
                         $('#agMesajBoxModal .modal-body').html("Seçtiğiniz kriterlere uygun soru bulamadık.")
                     }else{
-                        $soruArr = response;
-                        oyun_status = 'sorular_yuklendi';
+                        $soruArr            = response;
+                        oyun_status         = 'sorular_yuklendi';
                         $(form).hide();
                         $('#ag-soru-ekrani').show();
                         $('#ag-soru-kutusu').html();
                         $('#ag-soru-kutusu').html($soruArr['soru']['sorumetni']);
+                        $('#ag-soru-odulu').html($soruArr['soru']['odul'] +" Altın");
+                        soru_odulu          = $soruArr['soru']['odul'];
                     }
                     console.log($soruArr);
                 }
@@ -143,13 +193,13 @@
                 if(response['soruyok']==1){
                     alert("Soru Yok")
                 }else if(response['yanlis_cevap']==1) {
-                    //$('.ag-dogru-sayisi').html(response['dogru_cevap_sayisi'])
                     $('#ag-soru-ekrani').hide();
                     $('#ag-sonuc-ekrani').show();
+                    kaybettin_animasyonu();
                 }else if(response['dogru_cevap']==1) {
-                    //$('.ag-dogru-sayisi').html(response['dogru_cevap_sayisi'])
                     $('#ag-soru-ekrani').hide();
                     $('#ag-gecis-ekrani').show();
+                    kazandin_animasyonu();
                 }else{
                     $soruArr = response['soru'];
                     $('#ag-soru-kutusu').html();
@@ -157,6 +207,35 @@
                 }
             });
         })
+        
+        function kaybettin_animasyonu() {
+            $('#ses-yanlis')[0].play();
+            (function myLoop (i) {
+                setTimeout(function () {
+                    i = i - 10;
+                    $('#ag-kaybettin-orta').html(-(soru_odulu-i));
+                    if (i>0) myLoop(i);      //  decrement i and call myLoop again if i > 0
+                }, 10)
+            })(soru_odulu+10);
+        }
+
+        function kazandin_animasyonu() {
+            kazandin_gif = "<img id='ag-kazindin-gif' " +
+                "style='width:100%'" +
+                "src='/bgimages/yildiz_sacilmasi.gif'>"  ;
+
+            $('#anim-alani-sol').html(kazandin_gif);
+            $('#anim-alani-sag').html(kazandin_gif);
+            $('#ses-sihir')[0].play();
+
+            (function myLoop (i) {
+                setTimeout(function () {
+                    i = i - 10;
+                    $('#anim-alani-orta').html(soru_odulu-i);
+                    if (i>0) myLoop(i);      //  decrement i and call myLoop again if i > 0
+                }, 10)
+            })(soru_odulu+10);                        //  pass the number of iterations as an argument
+        }
 
         //--------------------------------------------------
         $('.ag-btn-konuyu-degistir').click(function () {
@@ -240,10 +319,10 @@
             font-size: 25px;
         }
 
-        .ag-btn-konuyu-degistir, .ag-btn-devam{
-            position: relative;
-            bottom: -100px;
+        .ag-btn-konuyu-degistir{
+
         }
+
 
         .form-control{
             font-size: 20px!important;
@@ -267,5 +346,34 @@
             border:5px solid #71b9d9;
         }
 
+        #ag-gecis-ekrani img, #ag-sonuc-ekrani img{
+            max-width: 200px;
+            max-height: 200px;
+        }
+
+        #ag-soru-odulu{
+            position: absolute;
+            right: 0px;
+            margin-top: -95px;
+            font-size: 27px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+        }
+
+        #anim-alani-orta{
+            text-align: center;
+            font-size: 120px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+        }
+        #ag-kaybettin-orta{
+            text-align: center;
+            font-size: 120px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+        }
     </style>
 @endsection

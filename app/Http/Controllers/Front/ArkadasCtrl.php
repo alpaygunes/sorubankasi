@@ -35,9 +35,10 @@ class ArkadasCtrl extends Controller
 
 
         $aranan = Input::get('aranan');
-        $sonuclarArr  = User::where('name','LIKE',"%$aranan%")->whereNotIn('id',$arkadaslarIDs)
-                        ->orwhere('email','LIKE',"%$aranan%")->whereNotIn('id',$arkadaslarIDs)
-                        ->select('name','id')
+        $sonuclarArr  = User::where('users.name','LIKE',"%$aranan%")->whereNotIn('users.id',$arkadaslarIDs)
+                        ->orwhere('email','LIKE',"%$aranan%")->whereNotIn('users.id',$arkadaslarIDs)
+                        ->leftJoin('profiles', 'profiles.user_id', '=', 'users.id')
+                        ->select('users.name','users.id','profiles.profil_resmi')
                         ->paginate(4);
 
         // önceden istek gönderilenleri belirt
@@ -85,7 +86,7 @@ class ArkadasCtrl extends Controller
     function getArkadaslikIstekleri(){
         $istek = DB::table('arkadas')
             ->leftJoin('users', 'users.id', '=', 'arkadas.user_id')
-            ->leftJoin('profiles', 'profiles.user_id', '=', 'arkadas.arkadas_id')
+            ->leftJoin('profiles', 'profiles.user_id', '=', 'arkadas.user_id')
             ->select('users.id','users.name','profiles.profil_resmi')
             ->where('arkadas.arkadaslik_istegi','=',1)
             ->where('arkadas.arkadas_id','=',Auth::user()->id)

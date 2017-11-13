@@ -159,6 +159,9 @@
 
             // seçeneklere tıklanıca cevap verilmiş olacak
             onClickSecenek();
+
+            // rakiplik isteği varsa belirt
+            rakiplikIstekleri();
         })
 
         function duellolariGetir() {
@@ -233,6 +236,7 @@
                             if(veri['hata']=='zaman_bitti'){
                                 $('#agMesajBoxModal').modal('show')
                                 $('#agMesajBoxModal .modal-body').html("<img src='/bgimages/zamanbitti.gif'>")
+                                $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                                 $('*[duello_id='+duello_id+']').hide();
                             }
                         }else {
@@ -285,12 +289,14 @@
                             $('#agGonderilenDuelloDetayModal #ag-soru').hide();
                         }else if(veri['kazandin']==1){
                             $('#agMesajBoxModal').modal('show')
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin0.gif">')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
                             bukutu.hide();
                         }else{
                             bukutu.hide();
                             $('#agMesajBoxModal').modal('show')
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin0.gif">')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
@@ -359,6 +365,7 @@
 
         }
 
+        var resim_no = Math.floor((Math.random() * 11) + 1);
         function onClickSecenek() {
             $('#ag-secenekler').on('click','.ag-secenek',function () {
                 cevap = $(this).attr('cevap');
@@ -376,17 +383,43 @@
                         $('*[duello_id='+duello_id+']').hide();
                         $('#agMesajBoxModal').modal('show')
                         if(veri['sonuc']=='dogru'){
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin1.gif">')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
                         }else{
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin1.gif">')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                         }
-                        $('#agMesajBoxModal .modal-title').html('UYARI !')
+
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 });
             })
+        }
+
+        function rakiplikIstekleri() {
+            $.ajax({
+                url: '/arkadas/getArkadaslikIstekleri',
+                dataType: 'json',
+                beforeSend: function() {
+                    //$('#ag-ara').attr("disabled", true);
+                },
+                complete: function() {
+                    //$('#ag-ara').attr("disabled", false);
+                },
+                success: function(json) {
+                    console.log(json)
+                    arkadaslikIstekleri =json;
+                    istek_sayisi = arkadaslikIstekleri.length
+                    if(istek_sayisi>0){
+                        $('#ag-buyuk-btn-arkadaslarim').prepend('<span id=\'ag-istek-sayisi\'>'+istek_sayisi+'</span>')
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
         }
 
     </script>
@@ -593,6 +626,20 @@
 
         #ag-sira-rakipte{
             min-height: 200px;
+        }
+
+        #ag-istek-sayisi{
+            position: absolute;
+            top: -6px;
+            border-radius: 10px;
+            background: red;
+            width: 16px;
+            height: 16px;
+            line-height: 16px;
+            padding-left: 4px;
+            color: #fff;
+            font-size: 16px;
+            text-shadow: 1px 1px #000;
         }
 
     </style>

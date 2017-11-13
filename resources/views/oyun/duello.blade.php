@@ -288,6 +288,7 @@
                         if(veri['hata']){
                             $('#agMesajBoxModal').modal('show')
                             $('#agMesajBoxModal .modal-body').html("<img src='/bgimages/zamanbitti.gif'>")
+                            $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                             $('*[duello_id='+duello_id+']').hide();
                             bukutu.hide();
                         }else {
@@ -339,13 +340,13 @@
                             $('#agGonderilenDuelloDetayModal #ag-soru').hide();
                         }else if(veri['kazandin']==1){
                             $('#agMesajBoxModal').modal('show')
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin1.gif">')
-                            $('#agMesajBoxModal .modal-title').html('Kazandınız !')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
                             bukutu.hide();
                         }else{
                             $('#agMesajBoxModal').modal('show')
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin1.gif">')
-                            $('#agMesajBoxModal .modal-title').html('Kaybettiniz !')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                             bukutu.hide();
                         }
                     },
@@ -418,6 +419,7 @@
             })
         }
 
+        var resim_no = Math.floor((Math.random() * 11) + 1);
         function onClickSecenek() {
 
             $('#ag-secenekler').on('click','.ag-secenek',function () {
@@ -435,11 +437,13 @@
                         $('#agMesajBoxModal').modal('show')
                         $('*[duello_id='+duello_id+']').hide();
                         if(veri['sonuc']=='dogru'){
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin1.gif">')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
                         }else{
-                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin1.gif">')
+                            $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                         }
-                        $('#agMesajBoxModal .modal-title').html('UYARI !')
+
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

@@ -1,8 +1,8 @@
     <div class="row">
-        <table class="table borderless">
+        <table class="table borderless " id="arama-sonuc-tablosu">
             <?php
             if(strlen(Input::get('aranan'))<3){
-                echo "En az üç karater yazmalısınız";
+                echo "<div style='text-align: center'>En az üç karakter yazmalısınız</div>";
                 exit();
             }
 
@@ -11,7 +11,10 @@
                 <?php $sayac++;?>
                 <tr>
                     <td style="text-align: center">
-                        {{ $sonucArr->perPage()*($sonucArr->currentPage()-1)+$sayac . "." }}
+{{--                        {{ $sonucArr->perPage()*($sonucArr->currentPage()-1)+$sayac . "." }}--}}
+                    </td>
+                    <td>
+                        <img class="ag-kullanici-resmi" src="{{$value->profil_resmi==null?'/images/noimage.png':$value->profil_resmi}}">
                     </td>
                     <td>
                          {!! $value->name !!}
@@ -99,3 +102,25 @@
 
 
 </script>
+
+    <style>
+        #arama-sonuc-tablosu tr td{
+            vertical-align: middle;
+            font-size: 12px;
+        }
+
+        #arama-sonuc-tablosu .ag-kullanici-resmi{
+            border: 0px solid #ccc!important;
+            width: 16px;
+            padding: 0px;
+        }
+
+        #arama-sonuc-tablosu .ag-kullanici-resmi:hover{
+            width: 100px;
+            position: absolute;
+            margin-top: -50px;
+            margin-left: -25px;
+            box-shadow: 2px 2px 8px #6b6b6b;
+        }
+    </style>
+

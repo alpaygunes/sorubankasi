@@ -1,5 +1,5 @@
 body{
-    background-color: #2f4f4f;
+    background-color: #156c80;
     font-size: 16px;
 }
 
@@ -97,12 +97,14 @@ h2{
     float: right;
     margin: 0px;
     cursor: pointer;
-    padding-right: 50px;
+    margin-right: -50px;
 }
 
 .ag-ust-menu-ogesi a {
     float: right;
     margin-left: 20px;
+    color: #b5d8ed!important;
+    font-size: 13px!important;
 }
 
 .ag-sayfalama-cubugu{
@@ -209,6 +211,7 @@ h2{
     border: 1px solid #2f4f4f;
     border-bottom: 10px solid #2f4f4f;
     padding: 20px;
+    position: relative;
 }
 
 
@@ -224,4 +227,12 @@ h2{
     color: #000000;
     text-shadow: 1px 1px 1px #fff;
     margin-top: 0px!important;
+}
+
+
+#agMesajBoxModal .modal-body img{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
 }

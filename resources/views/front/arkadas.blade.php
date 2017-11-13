@@ -12,7 +12,8 @@
         <div class="ag-ust-menu-ogesi">
 
             <a href="#" id="ag-search">
-                <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"></span>
+                Rakip ara
+                <span class="glyphicon glyphicon glyphicon-search" aria-hidden="true"> </span>
             </a>
 
             <a href="#" id="ag-istekleri-listele">
@@ -160,9 +161,12 @@
         cursor: pointer;
     }
 
-    .ag-ust-menu-ogesi{
-       font-size: 12px!important;
+    #ag-aranan,#ag-ara{
+        border-radius: 0!important;
+        height: 25px;
+        font-size: 11px;
     }
+
 
 
 </style>
@@ -176,7 +180,7 @@
         //   ---------------------------  ARA ----------------------------------------
         $('#ag-ara').click(function () {
             if($('#ag-aranan').val().length<3){
-                alert("Arama için en az üç harf gerekli.")
+                //alert("Arama için en az üç harf gerekli.")
                 //return false;
             }
             data    ='?aranan='+$('#ag-aranan').val();
@@ -235,8 +239,8 @@
                 tablogovdesi+='<tr>';
                 tablogovdesi+='<td user_id=\''+value['id']+'\'><img class="ag-kullanici-resmi" src='+value['profil_resmi']+'></td>';
                 tablogovdesi+='<td user_id=\''+value['id']+'\'>'+value['name']+'</td>';
-                tablogovdesi+='<td><div style="cursor:pointer"  islem=\'onayla\' arkadas_id=\''+value['id']+'\' >Onayla</div></td>';
-                tablogovdesi+='<td><div style="cursor:pointer"  islem=\'kaldir\' arkadas_id=\''+value['id']+'\'>Kaldır</div></td>';
+                tablogovdesi+='<td><div style="cursor:pointer" class=\'islem\'  islem=\'onayla\' arkadas_id=\''+value['id']+'\' >Onayla</div></td>';
+                tablogovdesi+='<td><div style="cursor:pointer" class=\'islem\'  islem=\'kaldir\' arkadas_id=\''+value['id']+'\'>Kaldır</div></td>';
                 tablogovdesi+='</tr>';
             });
             $('#ag-liste').hide();
@@ -249,7 +253,7 @@
             }
         })
 
-        $('#ag-ajax-liste').on('click','.btn',function () {
+        $('#ag-ajax-liste').on('click','.islem',function () {
             budugme         = $(this);
             islem           = $(this).attr('islem');
             arkadas_id      = $(this).attr('arkadas_id');
