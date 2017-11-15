@@ -55,6 +55,7 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Duello</h4>
                     <div id="ag-sayac"></div>
+                    <div id="ag-soru-odulu"></div>
                 </div>
                 <div class="modal-body">
                     <div id="ag-duello-bilgisi">
@@ -149,7 +150,14 @@
         </div>
     </div>
 
-
+    <audio id="ses-sihir">
+        <source src="/sesler/sihir.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="ses-yanlis">
+        <source src="/sesler/yanlis.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 
 
 
@@ -218,6 +226,8 @@
         })
 
 
+
+
         function duellolariGetir() {
             $.ajax({
                 url: '/duello/getUserDuellos/',
@@ -269,6 +279,9 @@
                 }
             });
         }
+
+
+
 
         var duello_id=null;
         function onClickKutu() {
@@ -332,7 +345,7 @@
                             }
                             $('#agGonderilenDuelloDetayModal').modal('show');
                             $('#agGonderilenDuelloDetayModal .ag-profil-resmi').attr('src', veri['profil_resmi'])
-                            $('#agGonderilenDuelloDetayModal .ag-name').html("Kime  <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
+                            $('#agGonderilenDuelloDetayModal .ag-name').html("Rakip  <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
                             $('#agGonderilenDuelloDetayModal .ag-odul').html("Ödül  <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
                             $('#agGonderilenDuelloDetayModal #ag-soruyu-goster').attr('duello_id', duello_id);
 
@@ -341,11 +354,15 @@
                         }else if(veri['kazandin']==1){
                             $('#agMesajBoxModal').modal('show')
                             $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-body').append("<div class='ag-odul-miktari'>" + veri['odul'] + "</div>")
+                            $('#agMesajBoxModal .modal-footer').append("<div class='ag-gonderen'>" + veri['name']+" nın altınlarını kaptın</div>")
                             $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
                             bukutu.hide();
                         }else{
                             $('#agMesajBoxModal').modal('show')
                             $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
+                            $('#agMesajBoxModal .modal-body').append("<div class='ag-odul-miktari'>-" + veri['odul'] + "</div>")
+                            $('#agMesajBoxModal .modal-footer').append("<div class='ag-gonderen'>" + veri['name']+" senin altınlarını kaptı </div>")
                             $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                             bukutu.hide();
                         }
@@ -359,7 +376,11 @@
 
         }
 
+
+
         var kalan_zaman=0;
+        var sayac_id    = 0;
+        var duello_odul    = 0;
         function onClickSoruyuGoster() {
             // gelen soruyü göser
             $('#agDuelloDetayModal #ag-soruyu-goster').click(function () {
@@ -377,10 +398,15 @@
                         if(veri['hata']){
                             alert(veri['hata'])
                         }else{
-                            $('#ag-metin').html(veri['duello_sorumetni'])
+                            $('#ag-metin').html(veri['duello_sorumetni']);
+                            kalan_zaman     = veri['kalan_zaman'];
+                            duello_odul     = veri['duello_odul'];
                             $('#ag-duello-bilgisi').hide();
+                            $('#ag-soru-odulu').html(duello_odul + ' Altın');
+                            $('#ag-sayac').show();
+                            $('#ag-soru-odulu').show();
                             $('#ag-soru').show();
-                            $('#ag-sayac').html(veri['kalan_zaman']);
+                            sayac_id = startTimer(kalan_zaman, document.querySelector('#ag-sayac '));
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
@@ -419,10 +445,14 @@
             })
         }
 
+
+
+
         var resim_no = Math.floor((Math.random() * 11) + 1);
         function onClickSecenek() {
 
             $('#ag-secenekler').on('click','.ag-secenek',function () {
+                window.clearInterval(sayac_id);
                 cevap = $(this).attr('cevap');
                 $.ajax({
                     url: '/duello/cevapKontrol/'+cevap,
@@ -439,9 +469,13 @@
                         if(veri['sonuc']=='dogru'){
                             $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
                             $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
+                            $('#agMesajBoxModal .modal-body').append('<div id="ag-kazandin-orta"></div>')
+                            kazandin_animasyonu();
                         }else{
                             $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
                             $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
+                            $('#agMesajBoxModal .modal-body').append('<div id="ag-kaybettin-orta"></div>')
+                            kaybettin_animasyonu();
                         }
 
                     },
@@ -451,6 +485,34 @@
                 });
             })
 
+        }
+
+        function kaybettin_animasyonu() {
+            $('#ses-yanlis')[0].play();
+            (function myLoop (i) {
+                setTimeout(function () {
+                    i = i - 10;
+                    $('#ag-kaybettin-orta').html(-(duello_odul-i));
+                    if (i>0) myLoop(i);      //  decrement i and call myLoop again if i > 0
+                }, 100)
+            })(duello_odul);
+        }
+
+
+        function kazandin_animasyonu() {
+            kazandin_gif = "<img id='ag-kazindin-gif' " +
+                "style='width:100%'" +
+                "src='/bgimages/yildiz_sacilmasi.gif'>"  ;
+
+            $('#ses-sihir')[0].play();
+
+            (function myLoop (i) {
+                setTimeout(function () {
+                    i = i - 10;
+                    $('#ag-kazandin-orta').html(duello_odul-i);
+                    if (i>0) myLoop(i);     //  decrement i and call myLoop again if i > 0
+                }, 100)
+            })(duello_odul);             //  pass the number of iterations as an argument
         }
 
 
@@ -708,6 +770,51 @@
             font-size: 30px;
             font-family: monospace;
             color: #ccc;
+        }
+
+        #ag-soru-odulu{
+            position: absolute;
+            right: 0px;
+            margin-top: -80px;
+            font-size: 27px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+        }
+
+        .modal-dialog{
+            margin-top: 100px;
+        }
+
+        #ag-kaybettin-orta{
+            text-align: center;
+            font-size: 120px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+            float: right;
+        }
+
+        #ag-kazandin-orta{
+            text-align: center;
+            font-size: 120px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+            float: right;
+        }
+
+        .ag-odul-miktari{
+            text-align: center;
+            font-size: 120px;
+            font-family: Anton;
+            color: #ffea10;
+            text-shadow: 1px 1px 1px #726e39;
+            float: right;
+        }
+
+        .modal-footer .ag-gonderen{
+            float: left;
         }
 
     </style>

@@ -245,9 +245,11 @@ class DuelloCtrl extends Controller
     }
 
     function soruyuGoster($komut){
+
         $duello_id          = Session::get('duello_id');
         $duello_sorumetni   = Session::get('duello_sorumetni');
         $soru_turu          = Session::get('duello_soru_turu');
+        $duello_odul        = Session::get('duello_odul');
         $kalan_zaman        = 1;
 
         // önizlemede süre başlamasın
@@ -259,13 +261,15 @@ class DuelloCtrl extends Controller
             return Response::json(array('hata'=>'zaman_bitti'));
         }else{
             return Response::json(array('duello_sorumetni'=>$duello_sorumetni
-                                        ,'soru_turu'=>$soru_turu,'kalan_zaman'=>$kalan_zaman));
+                                        ,'soru_turu'=>$soru_turu,'kalan_zaman'=>$kalan_zaman,'duello_odul'=>$duello_odul));
         }
     }
 
     function surecKontrol($sureyi_baslat=1){
+
         $kalan_zaman        = 0;
-        $duello_id = Session::get('duello_id');
+        $duello_id          = Session::get('duello_id');
+
         // soruyu gördüğse sureyi başlatalım. duello tablosuna işleyelim
         $duello             = Duello::find($duello_id);
 
@@ -277,6 +281,7 @@ class DuelloCtrl extends Controller
             $kalan_zaman =  $duello->son_cevaplama_zamani -  time();
             return $kalan_zaman; // kalan zamnı döndür
         }
+
         if(!$duello->son_cevaplama_zamani){
             $duello->son_cevaplama_zamani     = time() + Session::get('duello_soru_sure');
             $duello->save();
@@ -293,9 +298,9 @@ class DuelloCtrl extends Controller
         $duello_odul       = Session::get('duello_odul');
         $kalan_zaman       = $this->surecKontrol();
         if($kalan_zaman<=0){
-            return Response::json(array('hata'=>'zaman_bitti'));
+            return Response::json(array('hata'=>'zaman_bitti','duello_odul'=>$duello_odul));
         }else{
-            $dogru_cevap            = Session::get('duello_soru_dogru_secenek');
+            $dogru_cevap     =  Session::get('duello_soru_dogru_secenek');
             if($dogru_cevap==$cevap){
                 // kendi ödülü artacak
                 OdulToUser::kullaniciOdulunuGuncelle(Auth::user()->id,'altin',$duello_odul);
@@ -303,7 +308,7 @@ class DuelloCtrl extends Controller
                 OdulToUser::kullaniciOdulunuGuncelle(Session::get('duello_gonderen_id'),'altin',-$duello_odul);
                 // duello durumu değişecek
                 $kazanan_id = Auth::user()->id;
-                $dogru='dogru';
+                $sonuc='dogru';
             }else{
                 // kendi ödülü azalacak
                 OdulToUser::kullaniciOdulunuGuncelle(Auth::user()->id,'altin',-$duello_odul);
@@ -311,12 +316,11 @@ class DuelloCtrl extends Controller
                 OdulToUser::kullaniciOdulunuGuncelle(Session::get('duello_gonderen_id'),'altin',$duello_odul);
                 // duello durumu değişecek
                 $kazanan_id = Session::get('duello_gonderen_id');
-                $dogru='yanlis';
+                $sonuc='yanlis';
             }
         }
 
         $duello             =  Duello::find($duello_id);
-        // zaten cevap vermiş ve kazanan belirlenmişse
         if($duello->kazanan_id==null){
             $duello->kazanan_id = $kazanan_id;
             $duello->save();
@@ -328,8 +332,6 @@ class DuelloCtrl extends Controller
             Session::put('duello_gonderen_id',0);
             Session::put('duello_odul',0);
         }
-
-        return Response::json(array('sonuc'=>$dogru));
+        return Response::json(array('sonuc'=>$sonuc,'duello_odul'=>$duello_odul));
     }
-
 }

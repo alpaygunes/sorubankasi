@@ -24,6 +24,9 @@
     <link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
     <script src="{{ asset('summernote/summernote.js') }}"></script>
 
+    <!-- java scriptlerim -------------------- -->
+    <script src="{{ asset('js/ag-scripts.js') }}"></script>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/ag_front.css') }}" rel="stylesheet">
