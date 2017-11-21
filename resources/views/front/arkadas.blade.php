@@ -7,7 +7,6 @@
     @if(isset($baslik))
         <div class="panel ag-front-baslik-kutusu">
             <h1>{{$baslik}}</h1>
-            <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
         </div>
         <div class="ag-ust-menu-ogesi">
 
@@ -46,9 +45,8 @@
     @endif
 
 
-
     <div class="panel ag-front-panel col-md-12">
-        <div id="ag-liste">
+        <div id="ag-liste" class="duellolar-kutusu">
 
                 <table class="table borderless">
                     @foreach ( $arkadaslarArr as $key => $value )
@@ -83,37 +81,37 @@
     </div>
 
 
-        <!-- -------------------------------- ARAMA MODALI -------------------------------- - - -->
-        <div class="modal fade" id="ag-aramaModali" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Rakip Ara</h4>
-                    </div>
-                    <div class="modal-body">
+    <!-- -------------------------------- ARAMA MODALI -------------------------------- - - -->
+    <div class="modal fade" id="ag-aramaModali" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Rakip Ara</h4>
+                </div>
+                <div class="modal-body">
 
-                        <div class="form-group">
-                            <table class="table borderless">
-                                <tr>
-                                    <td style="vertical-align: middle">Ara :</td>
-                                    <td><input type="text" id="ag-aranan" class="form-control" placeholder="Eposta adresini yada isim soyisim yazın" required></td>
-                                    <td><input type="button" class="btn btn-primary" id="ag-ara" value="Ara"></td>
-                                </tr>
-                            </table>
-                            <div id="ag-arama-sonuclari">
+                    <div class="form-group">
+                        <table class="table borderless">
+                            <tr>
+                                <td style="vertical-align: middle">Ara :</td>
+                                <td><input type="text" id="ag-aranan" class="form-control" placeholder="Eposta adresini yada isim soyisim yazın" required></td>
+                                <td><input type="button" class="btn btn-primary" id="ag-ara" value="Ara"></td>
+                            </tr>
+                        </table>
+                        <div id="ag-arama-sonuclari">
 
-                            </div>
                         </div>
+                    </div>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-        <!-- -- -------------------------------- ARAMA MODALI SON -------------------------------- -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- -- -------------------------------- ARAMA MODALI SON -------------------------------- -->
 </div>
 
 <style>
@@ -171,7 +169,7 @@
 
 </style>
 
-    <script>
+<script>
 
         $('#ag-search').click(function () {
             $('#ag-aramaModali').modal('toggle');
@@ -474,4 +472,5 @@
         })
 
     </script>
+
 @endsection

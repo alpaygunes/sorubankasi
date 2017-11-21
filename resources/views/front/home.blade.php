@@ -6,29 +6,10 @@
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                 {{$baslik}}
-                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
         <div class="panel ag-front-panel col-md-12">
-            <div class="ag-dugmeler row">
 
-                <div class="ag-buyuk-btn" onclick="window.location.href='/sorucoz/giris'" id="ag-buyuk-btn-soru-coz">
-                    <div class="ag-btn-txt"> Soru çöz</div>
-                </div>
-
-                <div class="ag-buyuk-btn" onclick="window.location.href='/varliklarim'"  id="ag-buyuk-btn-varliklarim">
-                    <div class="ag-btn-txt"> Valıklarım</div>
-                </div>
-
-                <div class="ag-buyuk-btn" onclick="window.location.href='/duello'"  id="ag-buyuk-btn-duello">
-                    <div class="ag-btn-txt"> Duello </div>
-                </div>
-
-                <div class="ag-buyuk-btn" onclick="window.location.href='/arkadaslarim'"  id="ag-buyuk-btn-arkadaslarim">
-                    <div class="ag-btn-txt"> Rakiplerim </div>
-                </div>
-
-            </div>
             <h2>Bunlara cevap ver</h2>
             <div id="ag-sira-bende" class="row duellolar-kutusu"></div>
             <h2>Sordukların</h2>
@@ -135,14 +116,12 @@
                             </td>
                         </tr>
                     </table>
-
+                </div>
                 <div id="ag-soru">
                     <div id="ag-metin">
 
                     </div>
                 </div>
-
-            </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
@@ -173,6 +152,11 @@
 
             // rakiplik isteği varsa belirt
             rakiplikIstekleri();
+        })
+
+        $('#agDuelloDetayModal').on('hidden.bs.modal', function () {
+            $('#ag-sayac').hide();
+            window.clearInterval(sayac_id);
         })
 
         function duellolariGetir() {
@@ -231,6 +215,7 @@
 
 
         var duello_id   = null;
+        var modal_obj;
         function onClickKutu() {
             // bana gelenlere tıklanınca
             $('.panel').on('click','.ag-kutu-bana-gelenler',function () {
@@ -250,15 +235,20 @@
                         if(veri['hata']){
                             if(veri['hata']=='zaman_bitti'){
                                 $('#agMesajBoxModal').modal('show')
-                                $('#agMesajBoxModal .modal-body').html("<img src='/bgimages/zamanbitti.gif'>")
+                                $('#agMesajBoxModal .modal-body').html("<img src='/bgimages/zamanbitti"+  Math.floor((Math.random() * 4) + 1) +".gif'>")
                                 $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
+                                $('#agMesajBoxModal .modal-body').append('<div id="ag-kaybettin-orta"></div>')
+                                $('#agMesajBoxModal .modal-footer').html("<div class='ag-gonderen'>" + veri['gonderen_adi']+" senin altınlarını kaptı </div>")
+                                kaybettin_animasyonu();
                                 $('*[duello_id='+duello_id+']').hide();
+                                bukutu.hide();
                             }
                         }else {
                             if (veri['profil_resmi'] == null) {
                                 veri['profil_resmi'] = '/images/noimage.png'
                             }
                             $('#agDuelloDetayModal').modal('show');
+                            modal_obj = $('#agDuelloDetayModal');
                             $('#agDuelloDetayModal .ag-profil-resmi').attr('src', veri['profil_resmi'])
                             $('#agDuelloDetayModal .ag-name').html("Soruyu gönderen <br> <div class='ag-gonderen'>" + veri['name']+"</div>")
                             $('#agDuelloDetayModal .ag-odul').html("Ödül   <br> <div class='ag-duello-odulu'>" + veri['odul']+" Altın</div>")
@@ -310,7 +300,7 @@
                             $('#agMesajBoxModal').modal('show')
                             $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kazandin'+resim_no+'.gif">')
                             $('#agMesajBoxModal .modal-body').append("<div class='ag-odul-miktari'>" + veri['odul'] + "</div>")
-                            $('#agMesajBoxModal .modal-footer').append("<div class='ag-gonderen'>" + veri['name']+" nın altınlarını kaptın</div>")
+                            $('#agMesajBoxModal .modal-footer').html("<div class='ag-gonderen'>" + veri['name']+" nın altınlarını kaptın</div>")
                             $('#agMesajBoxModal .modal-title').html('ALTINLARI KAPTIN !')
 
                             bukutu.hide();
@@ -319,7 +309,7 @@
                             $('#agMesajBoxModal').modal('show')
                             $('#agMesajBoxModal .modal-body').html('<img src="/bgimages/kaybettin'+resim_no+'.gif">')
                             $('#agMesajBoxModal .modal-body').append("<div class='ag-odul-miktari'>-" + veri['odul'] + "</div>")
-                            $('#agMesajBoxModal .modal-footer').append("<div class='ag-gonderen'>" + veri['name']+" senin altınlarını kaptı </div>")
+                            $('#agMesajBoxModal .modal-footer').html("<div class='ag-gonderen'>" + veri['name']+" senin altınlarını kaptı </div>")
                             $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
                         }
                     },
@@ -332,16 +322,13 @@
 
         }
 
-
-
-
-
         var kalan_zaman     = 0;
         var sayac_id        = 0;
         var duello_odul     = 0;
         function onClickSoruyuGoster() {
             // gelen soruyü göser
             $('#agDuelloDetayModal #ag-soruyu-goster').click(function () {
+                window.clearInterval(sayac_id);
                 duello_id = $(this).attr('duello_id');
                 $.ajax({
                     url: '/duello/soruyuGoster/sureyi_baslat',
@@ -353,7 +340,8 @@
                     success: function(veri) {
                         console.log(veri)
                         if(veri['hata']){
-                            alert(veri['hata'])
+                            console.log("----------    onClickSoruyuGoster   ----------")
+                            console.log(veri['hata'])
                         }else{
                             $('#ag-metin').html(veri['duello_sorumetni'])
                             $('#ag-duello-bilgisi').hide();
@@ -387,7 +375,8 @@
                     success: function(veri) {
                         console.log(veri)
                         if(veri['hata']){
-                            alert(veri['hata'])
+                            console.log(" ------------------- onClickSoruyuGoster  ------------")
+                            console.log(veri['hata'])
                         }else{
                             $('#agGonderilenDuelloDetayModal #ag-metin').html(veri['duello_sorumetni'])
                             $('#agGonderilenDuelloDetayModal #ag-duello-bilgisi').hide();
@@ -403,11 +392,6 @@
 
         }
 
-
-
-
-
-
         var resim_no    = Math.floor((Math.random() * 11) + 1);
         function onClickSecenek() {
             $('#ag-secenekler').on('click','.ag-secenek',function () {
@@ -422,7 +406,6 @@
                     },
                     success: function(veri) {
                         console.log(veri)
-                        //alert(veri['sonuc'] + " Burada başarı ekranı gelecek yada başarısızlık. altınlar birinden diğerine geçecek" )
                         $('#agDuelloDetayModal').modal('hide')
                         $('*[duello_id='+duello_id+']').hide();
                         $('#agMesajBoxModal').modal('show')
@@ -472,8 +455,6 @@
                 }, 100)
             })(duello_odul);             //  pass the number of iterations as an argument
         }
-
-
 
         function rakiplikIstekleri() {
             $.ajax({
@@ -609,74 +590,7 @@
         }
 
 
-        .ag-dugmeler{
-            margin-bottom: 0px;
-            border-bottom:10px solid #2f4f4f;
-        }
 
-        .ag-buyuk-btn{
-            position: relative;
-            width: 150px;
-            height: 160px;
-            background-repeat: no-repeat;
-            display: block;
-            float: left;
-            margin: 20px;
-            cursor: pointer;
-        }
-
-        #ag-buyuk-btn-soru-coz{
-            width: 150px;
-            height: 160px;
-            background-image: url("/bgimages/bt-soru-coz.png");
-            background-size: 100%;
-            position: relative;
-            display: block;
-        }
-
-        #ag-buyuk-btn-varliklarim{
-            width: 150px;
-            height: 160px;
-            background-image: url("/bgimages/bt-varliklarim.png");
-            background-size: 100%;
-            position: relative;
-            display: block;
-        }
-
-        #ag-buyuk-btn-duello{
-            width: 150px;
-            height: 160px;
-            background-image: url("/bgimages/bt-duello.png");
-            background-size: 100%;
-            position: relative;
-            display: block;
-        }
-
-
-
-        #ag-buyuk-btn-arkadaslarim{
-            width: 150px;
-            height: 160px;
-            background-image: url("/bgimages/bt-arkadaslarim.png");
-            background-size: 100%;
-            position: relative;
-            display: block;
-        }
-
-        .ag-btn-txt{
-            font-family: "Open Sans","Helvetica Neue","Helvetica","Roboto","Arial",sans-serif;
-            font-size: 18px;
-            color: #fff;
-            position: absolute;
-            bottom: 11px;
-            text-align: center;
-            width: 100%;
-            text-shadow: 1px 1px 1px #000;
-            font-family: 'Gloria Hallelujah', cursive;
-            height: 30px;
-            line-height: 25px;
-            padding: 3px;
-        }
 
         #ag-soruyu-goster{
             left:35px;

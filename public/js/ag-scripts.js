@@ -32,10 +32,16 @@ function sayacSureBitti() {
         complete: function() {
         },
         success: function(veri) {
-            $('#agDuelloDetayModal').modal('hide');
+            console.log("----sayacSureBitti---");
+            console.log(veri);
+            /*$('#agDuelloDetayModal').modal('hide');
             $('#agMesajBoxModal').modal('show')
             $('#agMesajBoxModal .modal-body').html("<img src='/bgimages/zamanbitti.gif'>")
+            $('#agMesajBoxModal .modal-body').append('<div id="ag-kaybettin-orta"></div>')
             $('#agMesajBoxModal .modal-title').html('KAYBETTİN !')
+            kaybettin_animasyonu();*/
+            modal_obj.modal('hide')
+            $('*[duello_id='+duello_id+']').trigger('click')
         },
         error: function(xhr, ajaxOptions, thrownError) {
             alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);

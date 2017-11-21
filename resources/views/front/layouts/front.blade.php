@@ -102,7 +102,28 @@
             <div class="ag-logo">
                 SoruSor.co
             </div>
-        </div>
+        @if (Auth::check())
+            <div class="ag-dugmeler ">
+
+                <div class="ag-buyuk-btn" onclick="window.location.href='/sorucoz/giris'" id="ag-buyuk-btn-soru-coz">
+                    <div class="ag-btn-txt"> Soru çöz</div>
+                </div>
+
+                <div class="ag-buyuk-btn" onclick="window.location.href='/varliklarim'"  id="ag-buyuk-btn-varliklarim">
+                    <div class="ag-btn-txt"> Valıklarım</div>
+                </div>
+
+                <div class="ag-buyuk-btn" onclick="window.location.href='/duello'"  id="ag-buyuk-btn-duello">
+                    <div class="ag-btn-txt"> Duello </div>
+                </div>
+
+                <div class="ag-buyuk-btn" onclick="window.location.href='/arkadaslarim'"  id="ag-buyuk-btn-arkadaslarim">
+                    <div class="ag-btn-txt"> Rakiplerim </div>
+                </div>
+
+            </div>
+        @endif
+    </div>
 
     <div class="container">
             @if (Auth::check())
@@ -172,14 +193,12 @@
 
     .ag-logo{
         position: relative;
-        height: 150px;
         width: 400px;
         /*background-image: url("/bgimages/logo.png");*/
         background-repeat: no-repeat;
-        top: 30px;
         left: 25px;
         cursor: pointer;
-        font-size: 50px;
+        font-size: 35px;
         color: #fff;
         font-family: 'Gloria Hallelujah', cursive;
     }
@@ -187,9 +206,9 @@
     .ust{
         height: 190px;
         width: 100%;
-        background-image: url("/bgimages/ust.png");
         background-repeat: repeat-x;
-
+        background-color: #30626f;
+        margin-bottom: 20px;
     }
 
     #ag-islem-devam-ediyor{
@@ -204,10 +223,69 @@
     }
 
     #ag-footer{
+        position: relative;
         width: 100%;
         background-color: #0f2c3d;
         padding: 10px;
         color: #194a67;
         text-align: center;
+        height: 90px;
+        bottom:0px;
      }
+
+
+
+
+    .ag-dugmeler{
+        position: relative;
+        margin-top: -20px;
+        text-align: center;
+        width: 100%;
+        display: block;
+        z-index: 999;
+        min-width: 650px;
+
+    }
+
+    .ag-buyuk-btn{
+        position: relative;
+        width: 100px;
+        height: 120px;
+        background-repeat: no-repeat;
+        display: inline-block;
+        margin: 10px;
+        cursor: pointer;
+        background-size: 100%;
+    }
+
+    #ag-buyuk-btn-soru-coz{
+        background-image: url("/bgimages/bt-soru-coz.png");
+    }
+
+    #ag-buyuk-btn-varliklarim{
+        background-image: url("/bgimages/bt-varliklarim.png");
+    }
+
+    #ag-buyuk-btn-duello{
+        background-image: url("/bgimages/bt-duello.png");
+    }
+
+    #ag-buyuk-btn-arkadaslarim{
+        background-image: url("/bgimages/bt-arkadaslarim.png");
+    }
+
+    .ag-btn-txt{
+        font-family: "Open Sans","Helvetica Neue","Helvetica","Roboto","Arial",sans-serif;
+        font-size: 18px;
+        color: #fff;
+        position: absolute;
+        bottom: 11px;
+        text-align: center;
+        width: 100%;
+        text-shadow: 1px 1px 1px #000;
+        font-family: 'Gloria Hallelujah', cursive;
+        height: 30px;
+        line-height: 25px;
+        padding: 3px;
+    }
 </style>

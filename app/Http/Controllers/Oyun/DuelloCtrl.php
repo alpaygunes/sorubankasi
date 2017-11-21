@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Oyun;
 
 use App\Duello;
-use App\Soru;
+use App\SoruToUser;
 use App\User;
 use App\OdulToUser;
 use App\Http\Controllers\Controller;
@@ -41,7 +41,8 @@ class DuelloCtrl extends Controller
         };
 
         //seviyeden bir soru seç rasgele olsun
-        $soru       = Soru::getRasgeleSoru($seviye);
+        $soru       = SoruToUser::getRasgeleSoru($seviye);
+
         $soru_id    = $soru->id;
 
         if($soru->id){
@@ -52,6 +53,11 @@ class DuelloCtrl extends Controller
                          'soru_id'=>$soru_id]
                         );
         }
+
+        // soruyu gönderdikten sonra varlıklarımdan bir soru eksilsin.
+        SoruToUser::kullanicininSorusunuSil($soru_id);
+
+
 
         return Response::json(array($soru_id));
     }
@@ -151,6 +157,9 @@ class DuelloCtrl extends Controller
         $odul            = $ayarlar->$alan_adi;
         $duello->odul    = $odul;
 
+        //gönderenenin adi
+        $gonderen_adi   = $duello->name;
+
 
         if(!$duello){
             return Response::json(array('hata'=>'Duelo bulunamadı'));
@@ -180,7 +189,7 @@ class DuelloCtrl extends Controller
                     $duello->kazanan_id = $kazanan_id;
                     $duello->save();
                 }
-                return Response::json(array('hata'=>'zaman_bitti'));
+                return Response::json(array('hata'=>'zaman_bitti','duello_odul'=>$odul,'gonderen_adi'=>$gonderen_adi));
             }
 
             return Response::json($duello);

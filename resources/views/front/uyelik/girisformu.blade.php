@@ -71,5 +71,9 @@
         .ag-form-panel label {
             color: #8c8c8c;
         }
+
+        #ag-footer{
+            position: absolute!important;
+        }
     </style>
 @endsection

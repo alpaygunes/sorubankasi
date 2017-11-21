@@ -44,4 +44,9 @@
         </div>
     </div>
 </div>
+    <style>
+        #ag-footer{
+            position: absolute!important;
+        }
+    </style>
 @endsection

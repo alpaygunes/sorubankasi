@@ -5,11 +5,13 @@
     @if(isset($baslik))
         <div class="panel ag-front-baslik-kutusu">
             <h1>{{$baslik}}</h1>
-            <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
+            <div style="position: absolute;right: 40px;top: 40px">
+                <a href="/duello" style="color: #fff!important;;font-size: 16px!important;">Geri</a></div>
         </div>
     @endif
-        <div id="ag-rakibiniz">Rakibiniz  <span class="ag-rakip-adi">{{$rakip_bilgileri->name}}</span></div>
+
     <div class="panel ag-front-panel col-md-12">
+        <div id="ag-rakibiniz"><span class="ag-rakip-adi">{{$rakip_bilgileri->name}}'a bir soru gönder</span></div>
         <h2>Göndermek istediğiniz soru için bir seviye seçin.</h2>
         <div id="ag-mesaj" class="ag-aciklama"></div>
         <div id="ag-gonder" class="btn btn-primary" style="display: none">
@@ -43,6 +45,7 @@
     })
 
     function getSorularim() {
+        $('.ag-seviye-dugme').empty();
         $.ajax({
             url: '/varliklarim/json',
             dataType: 'json',
@@ -102,7 +105,7 @@
         }else if(seviye=="zor"){
             seviye_txt  = "zor";
             seviye_int  = 4;
-        }else if(seviye=="zok_zor"){
+        }else if(seviye=="cok_zor"){
             seviye_txt  = "çok zor";
             seviye_int  = 5;
         }
@@ -141,6 +144,7 @@
                     $('#agMesajBoxModal').modal('show')
                     $('#agMesajBoxModal .modal-body').html('Soru gönderildi.')
                     $('#agMesajBoxModal .modal-title').html('Mesaj !')
+                    getSorularim();
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -219,15 +223,10 @@
     }
 
     #ag-rakibiniz{
-        font-size: 25px;
-        width: 100%;
-        margin: 20px;
-        color: #fff;
+
     }
 
-    #ag-rakibiniz .ag-rakip-adi{
-        font-size: 35px;
-        font-family: 'Gloria Hallelujah', cursive;
+    .ag-rakip-adi{
     }
 
 

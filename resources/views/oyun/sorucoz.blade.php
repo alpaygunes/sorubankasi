@@ -6,7 +6,6 @@
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                 <h1>{{$baslik}}</h1>
-                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
             <div class="panel ag-front-panel col-md-12 " id="ag-soru-paneli">

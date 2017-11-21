@@ -1,11 +1,11 @@
 body{
-    background-color: #156c80;
+    background-color: #7199a2;
     font-size: 16px;
 }
 
 
 h1{
-    font-size: 40px;
+    font-size: 30px;
     color: #fff;
     width: 100%;
     text-shadow: 1px 1px 1px #000;
@@ -15,7 +15,7 @@ h1{
 }
 
 h2{
-    font-size: 25px;
+    font-size: 23px;
     color: #fff;
     width: 100%;
     text-shadow: 1px 1px 1px #000;
@@ -24,13 +24,7 @@ h2{
     margin-bottom: 11px!important;
 }
 
-.ag-anasayfa{
-    float: right;
-    position: relative;
-    top: -45px;
-    margin-right: 30px;
-    cursor: pointer;
-}
+
 
 
 .ag-panel{
@@ -97,14 +91,14 @@ h2{
     float: right;
     margin: 0px;
     cursor: pointer;
-    margin-right: -50px;
 }
 
 .ag-ust-menu-ogesi a {
     float: right;
     margin-left: 20px;
-    color: #b5d8ed!important;
+    color: #fff!important;
     font-size: 13px!important;
+    text-shadow: 0px 1px 1px #000;
 }
 
 .ag-sayfalama-cubugu{
@@ -146,7 +140,7 @@ h2{
 .ag-front-panel{
     position: relative;
     min-height:600px;
-    background-color: #395858;
+    background-color: #30626f;
     box-shadow: 0!important;
     border-radius: 5px!important;
     color: #fff;
@@ -171,7 +165,7 @@ h2{
     margin-right: auto;
     border-radius: 0px!important;
     border: 0px!important;
-    background-color: #395858!important;
+    background-color: #30626f!important;
     color: #fff;
     box-shadow:none;!important;
     padding: 1px!important;

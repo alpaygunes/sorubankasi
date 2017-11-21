@@ -40,6 +40,10 @@
             display: none;
         }
 
+        .ust{
+            height:100px!important;
+        }
+
         body{
             background-color: #156c80!important;
             background-image: none!important;
@@ -100,7 +104,7 @@
         .ag-giris{
             float: right;
             position: relative;
-            top: -165px;
+            top: -100px;
             right: 50px;
             font-size: 16px;
             border: 1px solid #fff;
@@ -116,6 +120,10 @@
             width: 100%;
             display: block;
             height: 50px;
+        }
+
+        #ag-footer{
+            position: absolute!important;
         }
 
         @media screen and (max-width: 850px) {

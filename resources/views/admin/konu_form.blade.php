@@ -3,7 +3,6 @@
     @if(isset($baslik))
         <div class="panel ag-baslik-kutusu">
             {{$baslik}}
-            <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
         </div>
     @endif
     @if(Session::has('mesaj'))

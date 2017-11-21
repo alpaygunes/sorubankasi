@@ -86,6 +86,10 @@
             color: #8c8c8c;
         }
 
+        #ag-footer{
+            position: absolute!important;
+        }
+
 
     </style>
 

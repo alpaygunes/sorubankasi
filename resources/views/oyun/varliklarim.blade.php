@@ -6,7 +6,6 @@
         @if(isset($baslik))
             <div class="panel ag-front-baslik-kutusu">
                <h1> {{$baslik}} </h1>
-                <i class="fa fa-home fa-2x ag-anasayfa" aria-hidden="true"></i>
             </div>
         @endif
             <div class="panel ag-front-panel col-md-12">
@@ -113,27 +112,27 @@
                             <tr>
                                 <td>Çok Kolay </td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_cok_kolay:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_cok_kolay:null }}" tur="fiyat_zm_cok_kolay" seviye="1" >Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_cok_kolay:null }}" tur="fiyat_zm_cok_kolay" seviye="1" >Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Kolay</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_kolay:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_kolay:null }}" tur="fiyat_zm_kolay" seviye="2">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_kolay:null }}" tur="fiyat_zm_kolay" seviye="2">Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Normal</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_normal:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_normal:null }}" tur="fiyat_zm_normal" seviye="3">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_normal:null }}" tur="fiyat_zm_normal" seviye="3">Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Zor</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_zor:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_zor:null }}" tur="fiyat_zm_zor" seviye="4" >Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_zor:null }}" tur="fiyat_zm_zor" seviye="4" >Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Çok Zor</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_cok_zor:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_cok_zor:null }}" tur="fiyat_zm_cok_zor" seviye="5">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_zm_cok_zor:null }}" tur="fiyat_zm_cok_zor" seviye="5">Satın Al</div></td>
                             </tr>
                         </table>
 
@@ -142,27 +141,27 @@
                             <tr>
                                 <td>Çok Kolay </td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_cok_kolay:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_cok_kolay:null }}" tur="fiyat_ds_cok_kolay" seviye="1">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_cok_kolay:null }}" tur="fiyat_ds_cok_kolay" seviye="1">Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Kolay</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_kolay:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_kolay:null }}" tur="fiyat_ds_kolay" seviye="2">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_kolay:null }}" tur="fiyat_ds_kolay" seviye="2">Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Normal</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_normal:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_normal:null }}" tur="fiyat_ds_normal" seviye="3">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_normal:null }}" tur="fiyat_ds_normal" seviye="3">Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Zor</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_zor:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_zor:null }}" tur="fiyat_ds_zor" seviye="4">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_zor:null }}" tur="fiyat_ds_zor" seviye="4">Satın Al</div></td>
                             </tr>
                             <tr>
                                 <td>Çok Zor</td>
                                 <td>{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_cok_zor:null }} Altın</td>
-                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_cok_zor:null }}" tur="fiyat_ds_cok_zor" seviye="5">Al</div></td>
+                                <td><div class="btn btn-success btn-xs ag-satin-al-btn" fiyat="{{  isset($ayarlarArr)?$ayarlarArr->fiyat_ds_cok_zor:null }}" tur="fiyat_ds_cok_zor" seviye="5">Satın Al</div></td>
                             </tr>
                         </table>
                     </div>
@@ -170,18 +169,27 @@
                         <br>
                         <table class="table borderless">
                             <tr>
-                                <td colspan="2">Satınalmak istediğiniz soru sayısını yazın.<br>
-                                    <input type="number" value="0" id="ag-istenen-miktar" min="1" class="form-control"></td>
+                                <td style="font-size: 15px">
+                                    Satınalmak istediğiniz soru sayısını yazın.
+                                </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
-                                    <h3><div class="label label-success label-lg" id="ag-bilgilendirme"></div></h3>
+
+                                <td>
+                                    <input type="number" value="0" id="ag-istenen-miktar" min="1" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div id="ag-bilgilendirme">
+
+                                    </div>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td><button class="btn btn-success" id="ag-onayla">Onayla</button></td>
-                                <td></td>
+
                             </tr>
                         </table>
 
@@ -258,14 +266,14 @@
         toplam_bedel = miktar*fiyat;
         //altinYeterlimi
         if(odullerArr['altin']<toplam_bedel){
-            $('#ag-bilgilendirme').removeClass('label-success')
+            //$('#ag-bilgilendirme').removeClass('label-success')
             $('#ag-bilgilendirme').addClass('label-warning')
             $('#ag-bilgilendirme').html('Altın miktarınız yetersiz !')
             $('#ag-onayla').attr("disabled", true);
 
         }else{
             $('#ag-bilgilendirme').html('Toplam '+toplam_bedel+' altın harcayacaksınız.')
-            $('#ag-bilgilendirme').addClass('label-success')
+            //$('#ag-bilgilendirme').addClass('label-success')
             $('#ag-bilgilendirme').removeClass('label-warning')
             $('#ag-onayla').attr("disabled", false);
         }
@@ -294,15 +302,15 @@
                 islemBar.show();
             },
             complete: function() {
-                $('#ag-onayla').attr("disabled", false);
                 islemBar.hide();
             },
             success: function(json) {
                 console.log(json)
                 if(json['hata']){
                     alert(json['hata']);
+                    $('#ag-onayla').attr("disabled", false);
                 }else{
-                    alert('Satın alındı');
+                    $('#ag-bilgilendirme').html('<span style="font-size:30px">Satın alındı</span>');
                     sayfayi_guncelle    =1;
                 }
             },
@@ -412,6 +420,29 @@
         position: absolute;
         bottom:0px;
     }
+
+    #ag-istenen-miktar{
+        border: 1px solid #ccc!important;
+        font-family: Anton;
+        font-size: 50px!important;
+        border-radius: 0px;
+        height: 70px!important;
+    }
+
+    #ag-bilgilendirme{
+        color: #000;
+        padding: 20px;
+    }
+
+    #ag-onayla{
+        font-family: Anton!important;
+        font-size: 20px!important;
+        width: 100%!important;
+        border-radius: 0px!important;
+        height: 75px;
+    }
+    
+    
 </style>
 
 @endsection
