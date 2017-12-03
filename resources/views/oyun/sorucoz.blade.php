@@ -292,16 +292,15 @@
         .ag-secenek{
             width: 60px;
             height: 60px;
-            border: 2px solid #bcbcbc;
+            border: 2px solid #30626f;
             float: left;
             text-align: center;
             margin: 7px;
-            padding: 3px;
             cursor: pointer;
             font-size: 35px;
             background-color: #70b3d1;
             text-shadow: 1px 1px 1px #000;
-            border-radius: 10px;
+            border-radius: 50px;
             color: #fff;
         }
 
@@ -339,7 +338,7 @@
         }
 
         #ag-soru-paneli{
-            box-shadow: 10px 10px 60px #000;
+
             background-color: #fff;
             color: #000;
             border:5px solid #71b9d9;
@@ -352,8 +351,8 @@
 
         #ag-soru-odulu{
             position: absolute;
-            right: 0px;
-            margin-top: -95px;
+            right: 10px;
+            margin-top: -97px;
             font-size: 27px;
             font-family: Anton;
             color: #ffea10;
@@ -373,6 +372,10 @@
             font-family: Anton;
             color: #ffea10;
             text-shadow: 1px 1px 1px #726e39;
+        }
+
+        .ag-front-baslik-kutusu{
+            margin-bottom: 0px!important;
         }
     </style>
 @endsection

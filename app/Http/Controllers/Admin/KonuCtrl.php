@@ -89,7 +89,7 @@ class KonuCtrl extends Controller
 
     function liste(){
         $baslik         = "Konular";
-        $konular_ham    = DB::table('konus')->paginate(15);
+        $konular_ham    = DB::table('konus')->paginate(150);
         $konularCopy    = $konular_ham;
         $this->altKonulariniGetir(0);
         // laravel objesini değiştiremediğimden kendi kopyamı oluşturuyorum
