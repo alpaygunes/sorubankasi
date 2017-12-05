@@ -1,0 +1,32 @@
+============================ yapılacaklar =====================
+
+
+3 - Profil sayfası için avatar resimleri bul
+    Avatar resimleri seviyeye göre değişmeli. Bunu Kullnıcı seçmeli.
+    Kullanıcı avatar seçerken seviyey göre avatar seçmek zorunda olmalı.
+    seviye değişince avatar seçmesi konusunda uyarılmalı.
+
+
+
+
+9 - Yeni kullanıcıya rehberlik yapacak yönergeler yazırlanmalı.
+    Mesala ilk girişte altın yoksa altın kaznamak için soru çözün uyarısı çıkmalı.
+    Rakiplerim e girince rakip eklemek için yönerge çıkmalı.
+    vb....
+
+
+
+13- Soru açıkken süre bittikten sonra cevap verilirse engellenmeli.
+
+19- Şu sesleri bir gözden geçirmeli. Yeni sesler bulunmarlı. Gönderilmiş soru sonucuna bakılırken kaybetme sesi bulunmalı.
+20-
+21-
+22- Kazandın9.gif i kırp
+23- Duelloda rakip seçitikten sonraki ekranda sorusatın al düğmesi olsun.
+24- Soru çözerken çözülen her soru oturumda tutulsun. bir sonraki sefer sorulmasın. Aksi halde sürekli aynı soruların gelme ihtimali var.
+25- Soru çözerken sınıf seçilince ilgili sınıfla ilgili üniteler listelenmeli.
+26- Soru çözerken ders seçildikten sonra ünite olarak farketmez seçeneği olmalı
+27- Ünitelerin sorulma zamanı olmalı. Ozaman gelmeden soruları sorulmamalı
+28- Üniteler listelenirken zamanı gelmiş olanlar aktip zamanı gelmeyenler pasif gözüksün. Karşılarındada tarihleri yazsın
+29- Günlük aktivitesi tutulsın. kaç cevap verdi kaçı dğru kaçı yanlış vb.
+30- facebookta bunu kayıtları paylaşa bilsin.
