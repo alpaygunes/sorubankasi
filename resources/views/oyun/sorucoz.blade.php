@@ -155,7 +155,9 @@
                     }
                     $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi}));
                 });
+                konuGizle();
             });
+
         })
 
         //---------------------------------------------------------------
@@ -260,6 +262,27 @@
                 $('#ag-gecis-ekrani').hide();
             });
         })
+
+
+
+        $('#sinif').change(function () {
+            konuGizle();
+        })
+
+    // sadece seçili sınıfın konuları listelensin diğerleri gizlensin.
+    function konuGizle() {
+        $("#konu_id option").each(function(){
+            konu_Adi        = $(this).text();
+            sinif           = konu_Adi.substring(0, 1);
+            secili_sinif    = $('#sinif option:selected').text();
+            console.log(sinif,secili_sinif)
+            if(sinif==secili_sinif){
+                $(this).show();
+            }else{
+                $(this).hide();
+            }
+        });
+    }
 
     </script>
 
