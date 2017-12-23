@@ -29,11 +29,21 @@ class SoruCozCtrl extends Controller
 
     function filtreleriKaydet(Request $request){
         if ($request->isMethod('post')) {
-            if(Input::get('konu_id')){
-                $request->session()->put('konu_id', Input::get('konu_id'));
+            if(Input::get('konu_id')=='farketmez'){
+                $id_arr                 = array();
+                $ders_id                = Input::get('dersler');
+                $dersin_konu_idleri_arr = Konu::getKonular($ders_id,true,'array',1);
+                foreach ($dersin_konu_idleri_arr as  $id=>$value ){
+                    $id_arr[]           = $id;
+                }
+                $request->session()->put('konu_id_arr', $id_arr);
             }else{
-                $request->session()->forget('konu_id');
+                $id_arr[]           = Input::get('konu_id');
+                $request->session()->put('konu_id_arr', $id_arr);
             }
+
+
+
             if(Input::get('zorluk')){
                 $request->session()->put('zorluk', Input::get('zorluk'));
             }else{
@@ -62,8 +72,13 @@ class SoruCozCtrl extends Controller
     var $sonuc                = array();
     function getSoru(Request $request){
         $whereArray                 = array();
-        if($request->session()->get('konu_id')){
-            $whereArray['konu_id']   = $request->session()->get('konu_id');
+
+        if($request->session()->get('dersler')){
+            $whereArray['dersler']   = $request->session()->get('dersler');
+        }
+
+        if($request->session()->get('konu_id_arr')){
+            $konu_id_arr   = $request->session()->get('konu_id_arr');
         }
         if($request->session()->get('zorluk')){
             $whereArray['zorluk']   = $request->session()->get('zorluk');
@@ -71,7 +86,7 @@ class SoruCozCtrl extends Controller
         if($request->session()->get('sinif')){
             $whereArray['sinif']    = $request->session()->get('sinif');
         }
-        $soru                       = DB::table('sorus')->where($whereArray)->inRandomOrder()->first();
+        $soru                       = DB::table('sorus')->where($whereArray)->whereIn('konu_id',$konu_id_arr)->inRandomOrder()->first();
         if(!count($soru)){
             return null;
         }
@@ -113,4 +128,5 @@ class SoruCozCtrl extends Controller
         $sonuc['soru'] = $this->getSoru($request);
         return Response::json($sonuc);
     }
+
 }

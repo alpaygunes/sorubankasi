@@ -35,7 +35,14 @@
                 <div class="seviye-txt">Çok zor</div>
             </div>
         </div>
+
+
+        <a href="/varliklarim" class="btn btn-success ag-soru-satinal" >
+            <i class="fa fa-shopping-cart" style="margin-right: 20px" aria-hidden="true"></i>
+            Soru satın alın</a>
+
     </div>
+
 </div>
 
 
@@ -45,7 +52,7 @@
     })
 
     function getSorularim() {
-        $('.ag-seviye-dugme').empty();
+        //$('.ag-seviye-dugme').empty();
         $.ajax({
             url: '/varliklarim/json',
             dataType: 'json',
@@ -229,7 +236,10 @@
     .ag-rakip-adi{
     }
 
-
+    .ag-soru-satinal{
+        font-family: Anton;
+        font-size: 16px;
+    }
 
 
 

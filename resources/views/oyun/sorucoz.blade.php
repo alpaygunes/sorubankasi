@@ -13,13 +13,17 @@
 <!--  -------------------------------------        FORM          --------------------------------------------  -->
 
                     {!! Form::open(['url' => '/sorucoz/filtreleriKaydet','id' => 'sorucozFrm']) !!}
+
                     {!! Form::label('dersler', 'Ders',['class' => 'ag-label']) !!}
                     {{ Form::select('dersler', $derslerArr,null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
-                    {!! Form::label('konu_id', 'Konu',['class' => 'ag-label']) !!}
-                    {{ Form::select('konu_id', array(''=>'Önce Dersi Seçin'),'', ['class' =>  'form-control ag-form-control','required'=>'required']) }}
+
                     {!! Form::label('sinif', 'Sınıf',['class' => 'ag-label']) !!}
                     {{ Form::select('sinif', array(''=>'Sınıf Seçin','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10','10'=>'10','11'=>'11','12'=>'12','13'=>'13','14'=>'14'),
                     null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
+
+                    {!! Form::label('konu_id', 'Konu',['class' => 'ag-label']) !!}
+                    {{ Form::select('konu_id', array(''=>'Önce Dersi Seçin'),'', ['class' =>  'form-control ag-form-control','required'=>'required']) }}
+
                     {!! Form::label('zorluk', 'Zorluk Seviyesi',['class' => 'ag-label']) !!}
                     {{ Form::select('zorluk', array('0'=>'Farketmez','1'=>'1-Çok kolay','2'=>'2','3'=>'3','4'=>'4','5'=>'5-Çok zor'),
                     null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
@@ -143,6 +147,7 @@
                     $(this).find('option').remove();
                 });
 
+                $('#konu_id').append($('<option>', {value: "farketmez",text: "Farketmez"}));
                 $.each( data, function( key, val ) {
                     girinti = '';
                     for(var i=0;i<val.seviye;i++){

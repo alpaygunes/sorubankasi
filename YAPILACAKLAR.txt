@@ -22,7 +22,7 @@
 20-
 21-
 22- Kazandın9.gif i kırp
-23- Duelloda rakip seçitikten sonraki ekranda sorusatın al düğmesi olsun.
+23-
 24- Soru çözerken çözülen her soru oturumda tutulsun. bir sonraki sefer sorulmasın. Aksi halde sürekli aynı soruların gelme ihtimali var.
 25- Soru çözerken sınıf seçilince ilgili sınıfla ilgili üniteler listelenmeli.
 26- Soru çözerken ders seçildikten sonra ünite olarak farketmez seçeneği olmalı
