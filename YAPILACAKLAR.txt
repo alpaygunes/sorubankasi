@@ -24,8 +24,8 @@
 22- Kazandın9.gif i kırp
 23-
 24- Soru çözerken çözülen her soru oturumda tutulsun. bir sonraki sefer sorulmasın. Aksi halde sürekli aynı soruların gelme ihtimali var.
-25- Soru çözerken sınıf seçilince ilgili sınıfla ilgili üniteler listelenmeli.
-26- Soru çözerken ders seçildikten sonra ünite olarak farketmez seçeneği olmalı
+25-
+26-
 27- Ünitelerin sorulma zamanı olmalı. Ozaman gelmeden soruları sorulmamalı
 28- Üniteler listelenirken zamanı gelmiş olanlar aktip zamanı gelmeyenler pasif gözüksün. Karşılarındada tarihleri yazsın
 29- Günlük aktivitesi tutulsın. kaç cevap verdi kaçı dğru kaçı yanlış vb.

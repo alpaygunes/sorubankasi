@@ -60,6 +60,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('guvenlik_kodu') ? ' has-error' : '' }}">
+                                <label for="guvenlik-kodu" class="col-md-4 control-label">Güvenlik kodu</label>
+                                <div class="col-md-6">
+                                    <img src="/uyelik/getGuvenlikResmi/" width="200" height="40">
+                                    <input id="guvenlik-kodu" type="text" class="form-control" name="guvenlik_kodu" required placeholder="Güvenlik kodunu yazın">
+                                    @if ($errors->has('guvenlik_kodu'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('guvenlik_kodu') }}</strong>
+                                    </span>
+                                    @endif
+
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
@@ -79,7 +93,7 @@
 
         .ag-form-panel {
             position: relative;
-            box-shadow: 10px 10px 50px #000;
+            margin-top: 50px;
         }
 
         .ag-form-panel label {
@@ -92,5 +106,25 @@
 
 
     </style>
+
+
+    <script>
+
+        /*$.ajax({
+            url: '/uyelik/getGuvenlikResmi/',
+            dataType: 'json',
+            beforeSend: function() {
+            },
+            complete: function() {
+            },
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });*/
+
+    </script>
 
 @endsection

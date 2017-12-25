@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use DB;
+use Session;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+
     /*
     |--------------------------------------------------------------------------
     | Register Controller
@@ -48,11 +51,28 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+
+        $guvenlik_kodu = session()->get('guvenlik_kodu');
+
+        /*if($data['guvenlik_kodu'] != $guvenlik_kodu){
+            //return "";
+        }*/
+
+        $v =  Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
+
+
+        if($guvenlik_kodu!=$data['guvenlik_kodu']){
+            $v->after(function ($validator) {
+                $validator->errors()->add('guvenlik_kodu', 'Güvenlik kodu yanlış !');
+            });
+        }
+
+
+        return $v;
     }
 
     /**

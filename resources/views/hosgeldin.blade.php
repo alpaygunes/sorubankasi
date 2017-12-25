@@ -113,6 +113,9 @@
             cursor: pointer;
             color: #fff;
             font-family: 'Anton', sans-serif;
+            height: 48px;
+            padding: 8px;
+            font-size: 20px;
         }
 
         .alt{

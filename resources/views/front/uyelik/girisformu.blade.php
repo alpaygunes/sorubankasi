@@ -65,7 +65,7 @@
 
         .ag-form-panel {
             position: relative;
-            box-shadow: 10px 10px 50px #000;
+            margin-top: 100px;
         }
 
         .ag-form-panel label {

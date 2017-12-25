@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Front;
 use App\User;
 use Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Input;
-use Illuminate\Support\Facades\Session;
 use Response;
 use App\Ayarlar;
 use App\Soru;
+use Session;
 
 class UyelikCtrl extends Controller
 {
@@ -60,6 +61,31 @@ class UyelikCtrl extends Controller
             $detayliSorularArr[] = $sorunun_detaylari;
         }
         return $detayliSorularArr;
+    }
+
+    function getGuvenlikResmi(Request $request){
+        $random_string_length = 6;
+        $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        $guvenlik_kodu = '';
+        $max = strlen($characters) - 1;
+        for ($i = 0; $i < $random_string_length; $i++) {
+            $guvenlik_kodu .= $characters[mt_rand(0, $max)];
+        }
+        $request->session()->put('guvenlik_kodu', $guvenlik_kodu);
+
+
+
+
+        $im = imagecreate(100, 30);
+        $bg = imagecolorallocate($im, 255, 255, 255);
+        $textcolor = imagecolorallocate($im, 0, 0, 255);
+        imagestring($im, 5, 0, 0, $guvenlik_kodu, $textcolor);
+        header('Content-type: image/png');
+
+        imagepng($im);
+        imagedestroy($im);
+
+
     }
 
 }
