@@ -152,7 +152,7 @@ class KonuCtrl extends Controller
 
     // belli bir konunun alt konularını JSON olarak veriri
     function getKonu($parent_id){
-        $this->altKonulariniGetir($parent_id);
+         $this->altKonulariniGetir($parent_id);
         return Response::json($this->konular);
     }
 
