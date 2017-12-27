@@ -30,6 +30,15 @@
         {!! Form::label('parent_id', 'Üst Konu',['class' => 'ag-label']) !!}
         {{ Form::select('parent_id', $konularArr,isset($konu->parent_id)?$konu->parent_id:null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
 
+
+        {!! Form::label('baslangic_tarihi', 'Serbest bırakma tarihi',['class' => 'ag-label']) !!}
+        {{ Form::date('baslangic_tarihi', isset($konu->baslangic_tarihi)?$konu->baslangic_tarihi:null, ['class' =>  'form-control ag-form-control tarih ','required'=>'required']) }}
+
+        {!! Form::label('bitis_tarihi', 'Engelleme tarihi',['class' => 'ag-label']) !!}
+        {{ Form::date('bitis_tarihi', isset($konu->bitis_tarihi)?$konu->bitis_tarihi:null, ['class' =>  'form-control ag-form-control tarih ','required'=>'required']) }}
+
+
+
         {!! Form::label('on_sayfada_listele', 'Ön sayfada listele',['class' => 'ag-label']) !!}
         <?php
         if(isset($konu)){
@@ -62,4 +71,13 @@
         }
     })
 </script>
+
+
+<style>
+
+    .tarih{
+
+    }
+
+</style>
 @stop

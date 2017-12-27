@@ -65,6 +65,8 @@ class KonuCtrl extends Controller
                 $konu->konu_adi                 = Input::get('konu_adi');
                 $konu->parent_id                = Input::get('parent_id');
                 $konu->on_sayfada_listele       = Input::get('on_sayfada_listele');
+                $konu->baslangic_tarihi         = Input::get('baslangic_tarihi');
+                $konu->bitis_tarihi             = Input::get('bitis_tarihi');
                 $konu->save();
                 Session::flash('mesaj', 'Kayıt işlemi tamamlandı');
                 return Redirect::to('/admin/konu/liste');
@@ -73,6 +75,8 @@ class KonuCtrl extends Controller
                 $konu->konu_adi                 = Input::get('konu_adi');
                 $konu->parent_id                = Input::get('parent_id');
                 $konu->on_sayfada_listele       = Input::get('on_sayfada_listele');
+                $konu->baslangic_tarihi         = Input::get('baslangic_tarihi');
+                $konu->bitis_tarihi             = Input::get('bitis_tarihi');
                 $konu->save();
                 Session::flash('mesaj', 'Güncelleme işlemi tamalandı.');
                 return Redirect::to('/admin/konu/liste');
@@ -105,9 +109,23 @@ class KonuCtrl extends Controller
     }
 
     function altKonulariniGetir($parent_id){
-        $alt_konular = DB::table('konus')->where('parent_id', '=', $parent_id)->get();
+        $alt_konular = DB::table('konus')
+            ->where('parent_id', '=', $parent_id)->get();
+            //->whereDate('baslangic_tarihi', '<=', date("Y-m-d"))
+            //->whereDate('bitis_tarihi', '>=', date("Y-m-d"))
+
+        /*ZAMANI GELMEYENLERE zamani_gelemdi İBRASEİNİ BIRAK.
+        ÖN SAYFA BUNU DEĞERLENDİR.
+        compare data*/
+        $today  = date("Y-m-d");
         foreach ($alt_konular as $konu){
             if($konu->parent_id == $parent_id){
+                $konu->zamani_gelmis = 0;
+                $konu->aciklama = $konu->baslangic_tarihi . ' tarihinden sonra';
+                if($today>=$konu->baslangic_tarihi
+                    && $today<=$konu->bitis_tarihi){
+                    $konu->zamani_gelmis = 1;
+                }
                 $konu->seviye           = $this->hiyerarsik_seviye;
                 $this->konular[$this->sayac] = $konu;
                 $this->sayac++;

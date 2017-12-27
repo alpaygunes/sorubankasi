@@ -18,7 +18,7 @@ class CreateDuellosTable extends Migration
             $table->integer('gonderen_id');
             $table->integer('rakip_id');
             $table->integer('soru_id');
-            $table->integer('kazanan')->nullable();
+            $table->integer('kazanan_id')->nullable();
             $table->integer('son_cevaplama_zamani');
             $table->timestamps();
         });

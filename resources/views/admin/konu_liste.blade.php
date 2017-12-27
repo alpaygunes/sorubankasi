@@ -27,8 +27,8 @@
                 <th>#</th>
                 <th>Konu Adı</th>
                 <th>Id</th>
-                <th>-</th>
-                <th>-</th>
+                <th>Serbest Bırakma / Engelleme Tarihi</th>
+                <th></th>
             </tr>
             </thead>
             <?php $sayac=0;?>
@@ -44,7 +44,7 @@
     <td style="width: 25px">{{ $konularArr->perPage()*($konularArr->currentPage()-1)+$sayac }}</td>
     <td>{{ $girinti .' '. $value->konu_adi }}</td>
     <td>{{ $value->id }}</td>
-    <td>-</td>
+    <td>{{ $value->baslangic_tarihi .' / '.  $value->bitis_tarihi }}</td>
     <td style="width: 100px">
         <div class="ag-sil pull-left ag-soru-sil-duzenle" konu-id="{{ $value->id }}">
             <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

@@ -153,7 +153,11 @@
                     for(var i=0;i<val.seviye;i++){
                         girinti += " ---- "
                     }
-                    $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi}));
+                    if(val.zamani_gelmis==1){
+                        $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi}));
+                    }else{
+                        $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi + ' - ' + val.aciklama,class:'pasif-konu',pasif:"pasif"}));
+                    }
                 });
                 konuGizle();
             });
@@ -161,12 +165,12 @@
         })
 
         //---------------------------------------------------------------
-        var $soruArr = new Array();
+        var $soruArr    = new Array();
         var oyun_status = 'giris';
-        var soru_odulu=0;
+        var soru_odulu  = 0;
         $('#sorucozFrm').submit( function(e){
             e.preventDefault();
-            form    = $(this);
+            form        = $(this);
             $.ajax( {
                 type: "POST",
                 url: form.attr( 'action' ),
@@ -186,7 +190,6 @@
                         $('#ag-soru-odulu').html($soruArr['soru']['odul'] +" Altın");
                         soru_odulu          = $soruArr['soru']['odul'];
                     }
-                    console.log($soruArr);
                 }
             } );
         });
@@ -404,6 +407,10 @@
 
         .ag-front-baslik-kutusu{
             margin-bottom: 0px!important;
+        }
+
+        #konu_id .pasif-konu{
+            color: #e9e9e9!important;
         }
     </style>
 @endsection

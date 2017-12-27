@@ -18,6 +18,8 @@ class CreateKonusTable extends Migration
             $table->string('konu_adi');
             $table->integer('on_sayfada_listele');
             $table->integer('parent_id');
+            $table->date('baslangic_tarihi');
+            $table->date('bitis_tarihi');
             $table->timestamps();
         });
     }
