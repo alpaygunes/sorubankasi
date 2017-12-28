@@ -68,11 +68,31 @@
 
         <script language="JavaScript">
             $(document).ready(function() {
-                $('#sorumetni').summernote({
-                    minHeight: 300,             // set minimum height of editor
-                    maxHeight: 700,             // set maximum height of editor
-                    focus: true                  // set focus to editable area after initializing summernote
-                });
+                $('#sorumetni').trumbowyg({
+                    btnsDef: {
+                        // Create a new dropdown
+                        image: {
+                            dropdown: ['insertImage', 'base64'],
+                            ico: 'insertImage'
+                        }
+                    },
+                    // Redefine the button pane
+                    btns: [
+                        ['viewHTML','undo','redo'],
+                        //['formatting'],
+                        ['strong', 'em','underline'],
+                        ['superscript', 'subscript'],
+                        //['link'],
+                        ['image'], // Our fresh created dropdown
+                        //['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+                        ['orderedList'],
+                        //['horizontalRule'],
+                        //['removeformat'],
+                        //['fullscreen']
+                    ],
+                    removeformatPasted: true,
+                    imageWidthModalEdit: true
+                })
             });
 
             $('#dersler').change(function () {

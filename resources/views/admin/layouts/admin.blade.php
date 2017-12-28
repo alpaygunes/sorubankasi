@@ -18,9 +18,12 @@
 
 
 
-    <!-- include summernote css/js-->
-    <link href="{{ asset('summernote/summernote.css') }}" rel="stylesheet">
-    <script src="{{ asset('summernote/summernote.js') }}"></script>
+    <!-- include trumbowyg css/js-->
+    <script src="{{ asset('editor/trumbowyg.min.js') }}"></script>
+    <script src="{{ asset('editor/plugins/base64/trumbowyg.base64.min.js') }}"></script>
+    <script src="{{ asset('editor/plugins/pasteimage/trumbowyg.pasteimage.min.js') }}"></script>
+    <link href="{{ asset('editor/ui/trumbowyg.min.css') }}" rel="stylesheet">
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
