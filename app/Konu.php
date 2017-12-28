@@ -14,8 +14,8 @@ class Konu extends Model
 
 
 
-    static   function getKonular($parent_id,$altkonularlaBeraber=false,$cikti_turu='array',$on_sayfada_listele=1){
-        Self::altKonulariniGetir($parent_id,$altkonularlaBeraber,$on_sayfada_listele);
+    static   function getKonular($parent_id,$altkonularlaBeraber=false,$cikti_turu='array',$on_sayfada_listele=1,$sadece_zamani_gelenler=0){
+        Self::altKonulariniGetir($parent_id,$altkonularlaBeraber,$on_sayfada_listele,$sadece_zamani_gelenler);
         if($cikti_turu=='JSON'){
             return Response::json(Self::$konular);
         }else if($cikti_turu=='array'){
@@ -31,8 +31,20 @@ class Konu extends Model
         }
     }
 
-    static function altKonulariniGetir($parent_id,$altkonularlaBeraber,$on_sayfada_listele){
-        $alt_konular = DB::table('konus')->where('parent_id', '=', $parent_id)->where('on_sayfada_listele','=',$on_sayfada_listele)->get();
+    static function altKonulariniGetir($parent_id,$altkonularlaBeraber,$on_sayfada_listele,$sadece_zamani_gelenler){
+        if($sadece_zamani_gelenler){
+            // soru seçmek için sadece zamanı gelenler listelenmeli
+            $alt_konular = DB::table('konus')
+                ->where('parent_id', '=', $parent_id)
+                ->where('on_sayfada_listele','=',$on_sayfada_listele)
+                ->whereDate('baslangic_tarihi', '<=', date("Y-m-d"))
+                ->whereDate('bitis_tarihi', '>=', date("Y-m-d"))
+                ->get();
+        }else{
+            //konuların tamamı listelenir. sorulma tarihi dikkate alınmaz
+            $alt_konular = DB::table('konus')->where('parent_id', '=', $parent_id)->where('on_sayfada_listele','=',$on_sayfada_listele)->get();
+        }
+
         foreach ($alt_konular as $konu){
             if($konu->parent_id == $parent_id){
                 $konu->seviye           = Self::$hiyerarsik_seviye;
@@ -40,7 +52,7 @@ class Konu extends Model
                 Self::$sayac++;
                 Self::$hiyerarsik_seviye++;
                 if($altkonularlaBeraber){
-                    Self::altKonulariniGetir($konu->id,$altkonularlaBeraber,$on_sayfada_listele);
+                    Self::altKonulariniGetir($konu->id,$altkonularlaBeraber,$on_sayfada_listele,$sadece_zamani_gelenler);
                 }
                 Self::$hiyerarsik_seviye--;
             }

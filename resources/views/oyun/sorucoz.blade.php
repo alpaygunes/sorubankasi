@@ -22,7 +22,7 @@
                     null, ['class' =>  'form-control ag-form-control','required'=>'required']) }}
 
                     {!! Form::label('konu_id', 'Konu',['class' => 'ag-label']) !!}
-                    {{ Form::select('konu_id', array(''=>'Önce Dersi Seçin'),'', ['class' =>  'form-control ag-form-control','required'=>'required']) }}
+                    {{ Form::select('konu_id', array(''=>'Önce Dersi Seçin'),'', ['class' =>  'form-control ag-form-control ','required'=>'required']) }}
 
                     {!! Form::label('zorluk', 'Zorluk Seviyesi',['class' => 'ag-label']) !!}
                     {{ Form::select('zorluk', array('0'=>'Farketmez','1'=>'1-Çok kolay','2'=>'2','3'=>'3','4'=>'4','5'=>'5-Çok zor'),
@@ -156,12 +156,23 @@
                     if(val.zamani_gelmis==1){
                         $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi}));
                     }else{
-                        $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi + ' - ' + val.aciklama,class:'pasif-konu',pasif:"pasif"}));
+                        $('#konu_id').append($('<option>', {value: data[key].id,text: girinti+val.konu_adi + ' | ' + val.aciklama,class:'pasif-konu',pasif:"pasif"}));
                     }
                 });
                 konuGizle();
             });
 
+        })
+
+
+
+
+        $('#konu_id').change(function () {
+            if($('#konu_id option:selected').attr('pasif')=='pasif'){
+                $('#agMesajBoxModal').modal('show')
+                $('#agMesajBoxModal .modal-body').html("Belirtilen tarihten önce seçemezsiniz.")
+                $('#konu_id').val('farketmez')
+            }
         })
 
         //---------------------------------------------------------------
@@ -279,12 +290,13 @@
             sinif           = konu_Adi.substring(0, 1);
             secili_sinif    = $('#sinif option:selected').text();
             console.log(sinif,secili_sinif)
-            if(sinif==secili_sinif){
+            if(sinif==secili_sinif || konu_Adi=='Farketmez'){
                 $(this).show();
             }else{
                 $(this).hide();
             }
         });
+        $('#konu_id').val('farketmez')
     }
 
     </script>

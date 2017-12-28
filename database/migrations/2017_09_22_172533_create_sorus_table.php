@@ -22,7 +22,7 @@ class CreateSorusTable extends Migration
             $table->string('yanit','1');
             $table->string('zorluk','1');
             $table->string('sinif','2');
-            $table->integer('market_sorusu')->default(1);
+            $table->integer('market_sorusu')->nullable();
             $table->timestamps();
         });
     }

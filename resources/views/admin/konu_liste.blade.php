@@ -21,7 +21,7 @@
         </div>
 @endif
     <div class="panel panel-default ag-panel">
-        <table class="table table-striped">
+        <table class="table table-striped" id="konu_table">
             <thead>
             <tr>
                 <th>#</th>
@@ -40,7 +40,7 @@
          $girinti.='&nbsp;&nbsp;&nbsp;&nbsp;';
      }
 ?>
-<tr>
+<tr parent_id="{{$value->parent_id}}" id="{{$value->id}}">
     <td style="width: 25px">{{ $konularArr->perPage()*($konularArr->currentPage()-1)+$sayac }}</td>
     <td>{{ $girinti .' '. $value->konu_adi }}</td>
     <td>{{ $value->id }}</td>
@@ -61,6 +61,10 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        $('[parent_id=0]').addClass('parent')
+    })
+
     $('.ag-duzenle').click(function () {
         id = $(this).attr('konu-id');
         window.location.href = "/admin/konu/duzenle/"+id
@@ -71,6 +75,26 @@
             window.location.href = "/admin/konu/sil/"+id
         }
     })
+
+    $('#konu_table tr').click(function () {
+        id = $(this).attr('id');
+        $('[parent_id='+id+']').toggle('fast');
+
+    })
 </script>
+
+
+    <style>
+        .parent{
+            font-size: 16px!important;
+            background-color: #e6f1f3 !important;
+            text-shadow: 1px 1px #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .parent:hover{
+            background-color: #d9e3e5 !important;
+        }
+    </style>
 @stop
 

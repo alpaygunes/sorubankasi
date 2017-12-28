@@ -32,7 +32,7 @@ class SoruCozCtrl extends Controller
             if(Input::get('konu_id')=='farketmez'){
                 $id_arr                 = array();
                 $ders_id                = Input::get('dersler');
-                $dersin_konu_idleri_arr = Konu::getKonular($ders_id,true,'array',1);
+                $dersin_konu_idleri_arr = Konu::getKonular($ders_id,true,'array',1,1);
                 foreach ($dersin_konu_idleri_arr as  $id=>$value ){
                     $id_arr[]           = $id;
                 }

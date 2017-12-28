@@ -103,6 +103,9 @@
                     data: form.serialize(),
                     success: function( response ) {
                         alert(response[0])
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
                     }
                 } );
 

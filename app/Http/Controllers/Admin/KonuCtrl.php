@@ -111,17 +111,12 @@ class KonuCtrl extends Controller
     function altKonulariniGetir($parent_id){
         $alt_konular = DB::table('konus')
             ->where('parent_id', '=', $parent_id)->get();
-            //->whereDate('baslangic_tarihi', '<=', date("Y-m-d"))
-            //->whereDate('bitis_tarihi', '>=', date("Y-m-d"))
 
-        /*ZAMANI GELMEYENLERE zamani_gelemdi İBRASEİNİ BIRAK.
-        ÖN SAYFA BUNU DEĞERLENDİR.
-        compare data*/
         $today  = date("Y-m-d");
         foreach ($alt_konular as $konu){
             if($konu->parent_id == $parent_id){
                 $konu->zamani_gelmis = 0;
-                $konu->aciklama = $konu->baslangic_tarihi . ' tarihinden sonra';
+                $konu->aciklama = $konu->baslangic_tarihi . ' tarihinden sonra seçebilirsiniz';
                 if($today>=$konu->baslangic_tarihi
                     && $today<=$konu->bitis_tarihi){
                     $konu->zamani_gelmis = 1;
