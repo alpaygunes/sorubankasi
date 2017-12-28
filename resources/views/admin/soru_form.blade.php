@@ -68,6 +68,7 @@
 
         <script language="JavaScript">
             $(document).ready(function() {
+
                 $('#sorumetni').trumbowyg({
                     btnsDef: {
                         // Create a new dropdown
