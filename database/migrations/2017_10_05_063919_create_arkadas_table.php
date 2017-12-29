@@ -17,9 +17,9 @@ class CreateArkadasTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('arkadas_id');
-            $table->integer('engelle');
-            $table->integer('arkadaslik_istegi');
-            $table->integer('listemde_gosterme');
+            $table->integer('engelle')->nullable();
+            $table->integer('arkadaslik_istegi')->nullable();
+            $table->integer('listemde_gosterme')->nullable();
             $table->timestamps();
         });
     }

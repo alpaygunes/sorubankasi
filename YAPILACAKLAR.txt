@@ -26,7 +26,8 @@
 24- Soru çözerken çözülen her soru oturumda tutulsun. bir sonraki sefer sorulmasın. Aksi halde sürekli aynı soruların gelme ihtimali var.
 25-
 26-
-27- Ünitelerin sorulma zamanı olmalı. Ozaman gelmeden soruları sorulmamalı
-28- Üniteler listelenirken zamanı gelmiş olanlar aktip zamanı gelmeyenler pasif gözüksün. Karşılarındada tarihleri yazsın
+27-
+28-
 29- Günlük aktivitesi tutulsın. kaç cevap verdi kaçı dğru kaçı yanlış vb.
 30- facebookta bunu kayıtları paylaşa bilsin.
+31- Soru gönderirkende vakti gelmiş konulardan soruların seçilmesine dikkat edilmeli
