@@ -118,7 +118,7 @@
         }
         mesaj = "Rakibinize "+ seviye_txt +" bir soru göndereceksiniz." +
             "<br> Bilemezse rakibinizin altınlarının bir kısmını alacaksınız." +
-            "Doğru cevap verirse sizin altınlarınızın bir kısmını kazacak.<br>"
+            "Doğru cevap verirse  altınlarınızın bir kısmını kaybedeceksiniz.<br>"
 
         if(soru_sayisi==0){
             mesaj ="Bu seviyede hiç sorunuz yok.";

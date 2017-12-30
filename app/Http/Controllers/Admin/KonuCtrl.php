@@ -64,7 +64,7 @@ class KonuCtrl extends Controller
                 $konu                           = new Konu();
                 $konu->konu_adi                 = Input::get('konu_adi');
                 $konu->parent_id                = Input::get('parent_id');
-                $konu->on_sayfada_listele       = Input::get('on_sayfada_listele');
+                $konu->on_sayfada_listele       = (Input::get('on_sayfada_listele')==null?0:1);
                 $konu->baslangic_tarihi         = Input::get('baslangic_tarihi');
                 $konu->bitis_tarihi             = Input::get('bitis_tarihi');
                 $konu->save();
@@ -74,7 +74,7 @@ class KonuCtrl extends Controller
                 $konu                           = Konu::find(Input::get('id'));
                 $konu->konu_adi                 = Input::get('konu_adi');
                 $konu->parent_id                = Input::get('parent_id');
-                $konu->on_sayfada_listele       = Input::get('on_sayfada_listele');
+                $konu->on_sayfada_listele       = (Input::get('on_sayfada_listele')==null?0:1);
                 $konu->baslangic_tarihi         = Input::get('baslangic_tarihi');
                 $konu->bitis_tarihi             = Input::get('bitis_tarihi');
                 $konu->save();
